@@ -3,27 +3,29 @@ UC1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000000  00800100  00800100  000000f0  2**0
+  0 .data         00000000  00800100  00800100  00000118  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         0000009c  00000000  00000000  00000054  2**1
+  1 .text         000000c4  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  000000f0  2**0
+  2 .comment      00000030  00000000  00000000  00000118  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000120  2**2
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000148  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000020  00000000  00000000  00000160  2**0
+  4 .debug_aranges 00000028  00000000  00000000  00000188  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   0000067c  00000000  00000000  00000180  2**0
+  5 .debug_info   00000692  00000000  00000000  000001b0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000005f8  00000000  00000000  000007fc  2**0
+  6 .debug_abbrev 00000610  00000000  00000000  00000842  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000001ec  00000000  00000000  00000df4  2**0
+  7 .debug_line   0000021a  00000000  00000000  00000e52  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000024  00000000  00000000  00000fe0  2**2
+  8 .debug_frame  00000048  00000000  00000000  0000106c  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000034d  00000000  00000000  00001004  2**0
+  9 .debug_str    00000359  00000000  00000000  000010b4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00000010  00000000  00000000  00001351  2**0
+ 10 .debug_loc    00000049  00000000  00000000  0000140d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000018  00000000  00000000  00001456  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -43,7 +45,7 @@ Disassembly of section .text:
   2c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
   30:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
   34:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
-  38:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
+  38:	0c 94 40 00 	jmp	0x80	; 0x80 <__vector_14>
   3c:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
   40:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
   44:	0c 94 3e 00 	jmp	0x7c	; 0x7c <__bad_interrupt>
@@ -63,42 +65,74 @@ Disassembly of section .text:
   6e:	d8 e0       	ldi	r29, 0x08	; 8
   70:	de bf       	out	0x3e, r29	; 62
   72:	cd bf       	out	0x3d, r28	; 61
-  74:	0e 94 40 00 	call	0x80	; 0x80 <main>
-  78:	0c 94 4c 00 	jmp	0x98	; 0x98 <_exit>
+  74:	0e 94 52 00 	call	0xa4	; 0xa4 <main>
+  78:	0c 94 60 00 	jmp	0xc0	; 0xc0 <_exit>
 
 0000007c <__bad_interrupt>:
   7c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
-00000080 <main>:
+00000080 <__vector_14>:
+#include<avr/interrupt.h> //lib pour utiliser interuptions
+
+#define F_CPU 16000000UL
+#define DEBUG_LED (1<<DDC5)
+
+ISR (TIMER0_COMPA_vect){
+  80:	1f 92       	push	r1
+  82:	0f 92       	push	r0
+  84:	0f b6       	in	r0, 0x3f	; 63
+  86:	0f 92       	push	r0
+  88:	11 24       	eor	r1, r1
+  8a:	8f 93       	push	r24
+  8c:	9f 93       	push	r25
+	PORTC^=DEBUG_LED;
+  8e:	98 b1       	in	r25, 0x08	; 8
+  90:	80 e2       	ldi	r24, 0x20	; 32
+  92:	89 27       	eor	r24, r25
+  94:	88 b9       	out	0x08, r24	; 8
+}
+  96:	9f 91       	pop	r25
+  98:	8f 91       	pop	r24
+  9a:	0f 90       	pop	r0
+  9c:	0f be       	out	0x3f, r0	; 63
+  9e:	0f 90       	pop	r0
+  a0:	1f 90       	pop	r1
+  a2:	18 95       	reti
+
+000000a4 <main>:
 
 
 int main(void)
 {
 	//Init port C:
-	DDRC |= DEBUG_LED; //definition de la direction des pins du poirt C
-  80:	87 b1       	in	r24, 0x07	; 7
-  82:	85 60       	ori	r24, 0x05	; 5
-  84:	87 b9       	out	0x07, r24	; 7
-	PORTC &= (~DEBUG_LED); //extinction/allumage des ports C
-  86:	88 b1       	in	r24, 0x08	; 8
-  88:	8a 7f       	andi	r24, 0xFA	; 250
-  8a:	88 b9       	out	0x08, r24	; 8
+	DDRC = DEBUG_LED; //definition de la direction des pins du poirt C
+  a4:	80 e2       	ldi	r24, 0x20	; 32
+  a6:	87 b9       	out	0x07, r24	; 7
+	PORTC = DEBUG_LED; //extinction/allumage des ports C
+  a8:	88 b9       	out	0x08, r24	; 8
 	
 	//init interrupt
 	sei(); //activation interruptions global
-  8c:	78 94       	sei
+  aa:	78 94       	sei
 	
 	//init timer interrupt pour led debug
-	TCCR0A|=0x00; //00 00 -- 00
-  8e:	84 b5       	in	r24, 0x24	; 36
-  90:	84 bd       	out	0x24, r24	; 36
-	TCCR0B|=0x00;
-  92:	85 b5       	in	r24, 0x25	; 37
-  94:	85 bd       	out	0x25, r24	; 37
-  96:	ff cf       	rjmp	.-2      	; 0x96 <main+0x16>
+	TCCR0A=0x00; //00 00 -- 00
+  ac:	14 bc       	out	0x24, r1	; 36
+	TCCR0B=0x01; //0 0 -- 0 01 (/1024 prescaler)
+  ae:	81 e0       	ldi	r24, 0x01	; 1
+  b0:	85 bd       	out	0x25, r24	; 37
+	TCNT0=0; // (init) ?
+  b2:	16 bc       	out	0x26, r1	; 38
+	OCR0A=200; //valeur à comparer avec TCNT0 pour générer inter
+  b4:	88 ec       	ldi	r24, 0xC8	; 200
+  b6:	87 bd       	out	0x27, r24	; 39
+	TIMSK0=0x02; //----- 010
+  b8:	82 e0       	ldi	r24, 0x02	; 2
+  ba:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <__DATA_REGION_ORIGIN__+0xe>
+  be:	ff cf       	rjmp	.-2      	; 0xbe <main+0x1a>
 
-00000098 <_exit>:
-  98:	f8 94       	cli
+000000c0 <_exit>:
+  c0:	f8 94       	cli
 
-0000009a <__stop_program>:
-  9a:	ff cf       	rjmp	.-2      	; 0x9a <__stop_program>
+000000c2 <__stop_program>:
+  c2:	ff cf       	rjmp	.-2      	; 0xc2 <__stop_program>
