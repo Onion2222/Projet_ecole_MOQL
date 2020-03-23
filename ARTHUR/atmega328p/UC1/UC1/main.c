@@ -32,6 +32,7 @@ Voir details des calculs dans le tableau Excel
 void timer0_init(){
 	//init timer interrupt pour led debug
 	//timer 0 (8 bits ""malheureusement"")
+	//se referer au datasheet atmel
 	TCCR0A=0x00; //00 00 -- 00
 	TCCR0B=0x01; //0 0 -- 0 01 (/1024 prescaler)
 	TCNT0=0; // (init) ?
