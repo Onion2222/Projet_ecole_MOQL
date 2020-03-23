@@ -17,9 +17,11 @@ volatile uint16_t var_clk=1;
 ISR (TIMER0_COMPA_vect){
 	
 	if(++var_clk>=65500){
-		PORTC^=DEBUG_LED;
+		PORTC^=DEBUG_LED; //clignotement de la LED de debug
 		var_clk=0;
 	}
+	
+
 }
 
 
@@ -37,9 +39,10 @@ void timer0_init(){
 	TCCR0B=0x01; //0 0 -- 0 01 (/1024 prescaler)
 	TCNT0=0; // (init) ?
 	OCR0A=246; //valeur à comparer avec TCNT0 pour générer inter
-	TIMSK0=0x02; //----- 010 gestion de l'interruption generé par timer0 (3 interuptions possibles)
+	TIMSK0=0x02; //----- 010 gestion de l'interruption generé par timer0 (3 interuptions possibles => x1x = COMPA (OCR0A)
 	//SE REFERER AUX CALCULS TABLEAU EXCEL
 }
+
 
 
 
