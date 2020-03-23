@@ -5,10 +5,11 @@
  * Author : Onion
  */ 
 #include <avr/io.h>
-#include<avr/interrupt.h> //lib pour utiliser interuptions
+#include <avr/interrupt.h> //lib pour utiliser interuptions
 
 #define F_CPU 16000000UL
 #define DEBUG_LED (1<<DDC5)
+#define ubrr 103
 
 //variable permettant de baisser la frequence de l'interruption TIMER0_COMPA (registre 8 bit trop court)
 volatile uint16_t var_clk=1;
@@ -19,6 +20,9 @@ ISR (TIMER0_COMPA_vect){
 	if(++var_clk>=65500){
 		PORTC^=DEBUG_LED; //clignotement de la LED de debug
 		var_clk=0;
+		USART0_send(65);
+		USART0_send(66);
+		USART0_send(67);
 	}
 	
 
@@ -43,9 +47,21 @@ void timer0_init(){
 	//SE REFERER AUX CALCULS TABLEAU EXCEL
 }
 
+void USART0_init(){
+	//voir tableau excel pour calcul BAUD
+	UBRR0H = (ubrr>>8);
+	UBRR0L = (ubrr);
+	UCSR0B = 0x98;//1 0 0 1 1 0? 0? 0?
+	UCSR0C = 0x06;//00 00 0 1 1 0
+}
 
-
-
+void USART0_send(unsigned int data)
+{
+	/* Wait for empty transmit buffer */
+	while (!(UCSR0A & (1<<UDRE0))));
+	/* Put data into buffer, sends the data */
+	UDR0 = data;
+}
 
 
 int main(void)
