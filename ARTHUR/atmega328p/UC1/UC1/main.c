@@ -10,16 +10,34 @@
 #define F_CPU 16000000UL
 #define DEBUG_LED (1<<DDC5)
 
-//variable permettant de basser la frequence de l'interruption TIMER0_COMPA (registre 8 bit trop court)
+//variable permettant de baisser la frequence de l'interruption TIMER0_COMPA (registre 8 bit trop court)
 volatile uint16_t var_clk=1;
 
 
 ISR (TIMER0_COMPA_vect){
 	
-	if(++var_clk>1000){
+	if(++var_clk>=65500){
 		PORTC^=DEBUG_LED;
-		var_clk=1;
+		var_clk=0;
 	}
+}
+
+
+
+/*
+Cette fonction initialise le timer 0 (8bits)
+la valeur OCR0A permet de declencher l'interupteur TIMER0_COMPA
+Voir details des calculs dans le tableau Excel
+*/
+void timer0_init(){
+	//init timer interrupt pour led debug
+	//timer 0 (8 bits ""malheureusement"")
+	TCCR0A=0x00; //00 00 -- 00
+	TCCR0B=0x01; //0 0 -- 0 01 (/1024 prescaler)
+	TCNT0=0; // (init) ?
+	OCR0A=246; //valeur à comparer avec TCNT0 pour générer inter
+	TIMSK0=0x02; //----- 010 gestion de l'interruption generé par timer0 (3 interuptions possibles)
+	//SE REFERER AUX CALCULS TABLEAU EXCEL
 }
 
 
@@ -34,19 +52,9 @@ int main(void)
 	
 	//init interrupt
 	sei(); //activation interruptions global
-	
-	//init timer interrupt pour led debug
-	//timer 0 (8 bits ""malheureusement"")
-	
-	TCCR0A=0x00; //00 00 -- 00
-	TCCR0B=0x01; //0 0 -- 0 01 (/1024 prescaler)
-	TCNT0=0; // (init) ?
-	OCR0A=156; //valeur à comparer avec TCNT0 pour générer inter
-	TIMSK0=0x02; //----- 010 gestion de l'interruption generé par timer0 (3 interuptions possibles)
-	//f=Fcryst/(prescal*(OCR0A ou 256))
-	//f=16 000 000 / (1024 * 250) = 100,16Hz => T = 1/100.16 ~ 1ms
-	
-    /* Replace with your application code */
+	timer0_init(); //init du timer
+
+
     while (1) 
     {
 		

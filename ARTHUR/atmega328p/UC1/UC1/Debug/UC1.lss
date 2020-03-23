@@ -3,29 +3,29 @@ UC1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000002  00800100  00000102  00000176  2**0
+  0 .data         00000002  00800100  00000104  00000178  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000102  00000000  00000000  00000074  2**1
+  1 .text         00000104  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  00000178  2**0
+  2 .comment      00000030  00000000  00000000  0000017a  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001a8  2**2
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001ac  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000028  00000000  00000000  000001e8  2**0
+  4 .debug_aranges 00000030  00000000  00000000  000001ec  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000006b4  00000000  00000000  00000210  2**0
+  5 .debug_info   000006d7  00000000  00000000  0000021c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000628  00000000  00000000  000008c4  2**0
+  6 .debug_abbrev 0000064b  00000000  00000000  000008f3  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000226  00000000  00000000  00000eec  2**0
+  7 .debug_line   0000023c  00000000  00000000  00000f3e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000050  00000000  00000000  00001114  2**2
+  8 .debug_frame  00000060  00000000  00000000  0000117c  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000036a  00000000  00000000  00001164  2**0
+  9 .debug_str    00000376  00000000  00000000  000011dc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000056  00000000  00000000  000014ce  2**0
+ 10 .debug_loc    00000056  00000000  00000000  00001552  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000018  00000000  00000000  00001524  2**0
+ 11 .debug_ranges 00000020  00000000  00000000  000015a8  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -70,7 +70,7 @@ Disassembly of section .text:
   74:	11 e0       	ldi	r17, 0x01	; 1
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
-  7a:	e2 e0       	ldi	r30, 0x02	; 2
+  7a:	e4 e0       	ldi	r30, 0x04	; 4
   7c:	f1 e0       	ldi	r31, 0x01	; 1
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
@@ -78,15 +78,15 @@ Disassembly of section .text:
   84:	a2 30       	cpi	r26, 0x02	; 2
   86:	b1 07       	cpc	r27, r17
   88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
-  8a:	0e 94 71 00 	call	0xe2	; 0xe2 <main>
-  8e:	0c 94 7f 00 	jmp	0xfe	; 0xfe <_exit>
+  8a:	0e 94 79 00 	call	0xf2	; 0xf2 <main>
+  8e:	0c 94 80 00 	jmp	0x100	; 0x100 <_exit>
 
 00000092 <__bad_interrupt>:
   92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000096 <__vector_14>:
 
-
+//variable permettant de baisser la frequence de l'interruption TIMER0_COMPA (registre 8 bit trop court)
 volatile uint16_t var_clk=1;
 
 
@@ -100,72 +100,76 @@ ISR (TIMER0_COMPA_vect){
   a2:	8f 93       	push	r24
   a4:	9f 93       	push	r25
 	
-	if(++var_clk>1000){
+	if(++var_clk>=65500){
   a6:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
   aa:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
   ae:	01 96       	adiw	r24, 0x01	; 1
   b0:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__data_start+0x1>
   b4:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__data_start>
-  b8:	89 3e       	cpi	r24, 0xE9	; 233
-  ba:	93 40       	sbci	r25, 0x03	; 3
-  bc:	50 f0       	brcs	.+20     	; 0xd2 <__vector_14+0x3c>
+  b8:	8c 3d       	cpi	r24, 0xDC	; 220
+  ba:	9f 4f       	sbci	r25, 0xFF	; 255
+  bc:	40 f0       	brcs	.+16     	; 0xce <__vector_14+0x38>
 		PORTC^=DEBUG_LED;
   be:	98 b1       	in	r25, 0x08	; 8
   c0:	80 e2       	ldi	r24, 0x20	; 32
   c2:	89 27       	eor	r24, r25
   c4:	88 b9       	out	0x08, r24	; 8
-		var_clk=1;
-  c6:	81 e0       	ldi	r24, 0x01	; 1
-  c8:	90 e0       	ldi	r25, 0x00	; 0
-  ca:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__data_start+0x1>
-  ce:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__data_start>
+		var_clk=0;
+  c6:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <__data_start+0x1>
+  ca:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__data_start>
 	}
 }
-  d2:	9f 91       	pop	r25
-  d4:	8f 91       	pop	r24
-  d6:	2f 91       	pop	r18
+  ce:	9f 91       	pop	r25
+  d0:	8f 91       	pop	r24
+  d2:	2f 91       	pop	r18
+  d4:	0f 90       	pop	r0
+  d6:	0f be       	out	0x3f, r0	; 63
   d8:	0f 90       	pop	r0
-  da:	0f be       	out	0x3f, r0	; 63
-  dc:	0f 90       	pop	r0
-  de:	1f 90       	pop	r1
-  e0:	18 95       	reti
+  da:	1f 90       	pop	r1
+  dc:	18 95       	reti
 
-000000e2 <main>:
+000000de <timer0_init>:
+Voir details des calculs dans le tableau Excel
+*/
+void timer0_init(){
+	//init timer interrupt pour led debug
+	//timer 0 (8 bits ""malheureusement"")
+	TCCR0A=0x00; //00 00 -- 00
+  de:	14 bc       	out	0x24, r1	; 36
+	TCCR0B=0x01; //0 0 -- 0 01 (/1024 prescaler)
+  e0:	81 e0       	ldi	r24, 0x01	; 1
+  e2:	85 bd       	out	0x25, r24	; 37
+	TCNT0=0; // (init) ?
+  e4:	16 bc       	out	0x26, r1	; 38
+	OCR0A=246; //valeur à comparer avec TCNT0 pour générer inter
+  e6:	86 ef       	ldi	r24, 0xF6	; 246
+  e8:	87 bd       	out	0x27, r24	; 39
+	TIMSK0=0x02; //----- 010 gestion de l'interruption generé par timer0 (3 interuptions possibles)
+  ea:	82 e0       	ldi	r24, 0x02	; 2
+  ec:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <__TEXT_REGION_LENGTH__+0x7e006e>
+  f0:	08 95       	ret
+
+000000f2 <main>:
 
 
 int main(void)
 {
 	//Init port C:
 	DDRC = DEBUG_LED; //definition de la direction des pins du poirt C
-  e2:	80 e2       	ldi	r24, 0x20	; 32
-  e4:	87 b9       	out	0x07, r24	; 7
+  f2:	80 e2       	ldi	r24, 0x20	; 32
+  f4:	87 b9       	out	0x07, r24	; 7
 	PORTC = DEBUG_LED; //extinction/allumage des ports C
-  e6:	88 b9       	out	0x08, r24	; 8
+  f6:	88 b9       	out	0x08, r24	; 8
 	
 	//init interrupt
 	sei(); //activation interruptions global
-  e8:	78 94       	sei
-	
-	//init timer interrupt pour led debug
-	//timer 0 (8 bits ""malheureusement"")
-	
-	TCCR0A=0x00; //00 00 -- 00
-  ea:	14 bc       	out	0x24, r1	; 36
-	TCCR0B=0x01; //0 0 -- 0 01 (/1024 prescaler)
-  ec:	81 e0       	ldi	r24, 0x01	; 1
-  ee:	85 bd       	out	0x25, r24	; 37
-	TCNT0=0; // (init) ?
-  f0:	16 bc       	out	0x26, r1	; 38
-	OCR0A=156; //valeur à comparer avec TCNT0 pour générer inter
-  f2:	8c e9       	ldi	r24, 0x9C	; 156
-  f4:	87 bd       	out	0x27, r24	; 39
-	TIMSK0=0x02; //----- 010
-  f6:	82 e0       	ldi	r24, 0x02	; 2
-  f8:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <__DATA_REGION_ORIGIN__+0xe>
-  fc:	ff cf       	rjmp	.-2      	; 0xfc <main+0x1a>
+  f8:	78 94       	sei
+	timer0_init(); //init du timer
+  fa:	0e 94 6f 00 	call	0xde	; 0xde <timer0_init>
+  fe:	ff cf       	rjmp	.-2      	; 0xfe <main+0xc>
 
-000000fe <_exit>:
-  fe:	f8 94       	cli
+00000100 <_exit>:
+ 100:	f8 94       	cli
 
-00000100 <__stop_program>:
- 100:	ff cf       	rjmp	.-2      	; 0x100 <__stop_program>
+00000102 <__stop_program>:
+ 102:	ff cf       	rjmp	.-2      	; 0x102 <__stop_program>
