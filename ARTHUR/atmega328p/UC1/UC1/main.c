@@ -7,66 +7,49 @@
 #include <avr/io.h>
 #include <avr/interrupt.h> //lib pour utiliser interuptions
 
+#include "UART.h"
+#include "timer.h"
+
 #define F_CPU 16000000UL
 #define DEBUG_LED (1<<DDC5)
-#define ubrr 103
+
 
 //variable permettant de baisser la frequence de l'interruption TIMER0_COMPA (registre 8 bit trop court)
 volatile uint16_t var_clk=1;
+volatile uint8_t heartbeat=1;
 
 
 
-
-
-
-/*
-Cette fonction initialise le timer 0 (8bits)
-la valeur OCR0A permet de declencher l'interupteur TIMER0_COMPA
-Voir details des calculs dans le tableau Excel
-*/
-void timer0_init(){
-	//init timer interrupt pour led debug
-	//timer 0 (8 bits ""malheureusement"")
-	//se referer au datasheet atmel
-	TCCR0A=0x00; //00 00 -- 00
-	TCCR0B=0x01; //0 0 -- 0 01 (/1024 prescaler)
-	TCNT0=0; // (init) ?
-	OCR0A=246; //valeur à comparer avec TCNT0 pour générer inter
-	TIMSK0=0x02; //----- 010 gestion de l'interruption generé par timer0 (3 interuptions possibles => x1x = COMPA (OCR0A)
-	//SE REFERER AUX CALCULS TABLEAU EXCEL
-}
-
-void USART0_init(){
-	//voir tableau excel pour calcul BAUD
-	UBRR0H = (ubrr>>8);
-	UBRR0L = (ubrr);
-	UCSR0B = 0x98;//1 0 0 1 1 0? 0? 0?
-	UCSR0C = 0x06;//00 00 0 1 1 0
-}
-
-void USART0_send(unsigned int data)
-{
-	while (!( UCSR0A & (1<<UDRE0)));
-	UDR0=data;
-}
-
-
-
-ISR (TIMER0_COMPA_vect){
-	
-	if(++var_clk>=65500){
-		PORTC^=DEBUG_LED; //clignotement de la LED de debug
-		
-		USART0_send('a');
-		USART0_send('b');
-		USART0_send('c');
-		
-		var_clk=0;
+ISR (TIMER0_COMPA_vect){	
+	if(++var_clk>=80){//execution toutes les secondes
+		if(heartbeat==1){
+			PORTC^=DEBUG_LED; //clignotement de la LED de debug	
+			USART0_sendByte('*'); //envoie d'un heartbeat à l'UART	
+			var_clk=0;
+		}
 	}
-	
-
 }
 
+ISR(USART_RX_vect){
+	unsigned char ByteLu=UDR0;
+	/*//repeteur
+	USART0_send('>');
+	USART0_sendByte(ByteLu);
+	*/
+	switch (ByteLu)
+	{
+	case 's':
+		if(heartbeat==1){
+			USART0_sendString("Arret heartbeat");
+			heartbeat=0;
+			PORTC&=!DEBUG_LED;
+		}else{
+			USART0_sendString("Lancement heartbeat");
+			heartbeat=1;
+		}
+		break;		
+	}
+}
 
 
 
@@ -79,7 +62,10 @@ int main(void)
 	
 	//init interrupt
 	sei(); //activation interruptions global
-	timer0_init(); //init du timer
+	timer0_init(195); //init du timer
+	USART0_init(103); //init UART à 9600 Baud
+	
+	USART0_sendString("Demarrage du robot");
 
 
     while (1) 
