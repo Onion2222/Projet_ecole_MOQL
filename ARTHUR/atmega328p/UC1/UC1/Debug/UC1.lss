@@ -3,29 +3,29 @@ UC1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000002  00800100  00000104  00000178  2**0
+  0 .data         00000002  00800100  00000150  000001c4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000104  00000000  00000000  00000074  2**1
+  1 .text         00000150  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  0000017a  2**0
+  2 .comment      00000030  00000000  00000000  000001c6  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001ac  2**2
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000001f8  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000030  00000000  00000000  000001ec  2**0
+  4 .debug_aranges 00000040  00000000  00000000  00000238  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000006d7  00000000  00000000  0000021c  2**0
+  5 .debug_info   00000765  00000000  00000000  00000278  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000064b  00000000  00000000  000008f3  2**0
+  6 .debug_abbrev 0000069a  00000000  00000000  000009dd  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   0000023c  00000000  00000000  00000f3e  2**0
+  7 .debug_line   0000029f  00000000  00000000  00001077  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000060  00000000  00000000  0000117c  2**2
+  8 .debug_frame  000000ac  00000000  00000000  00001318  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000376  00000000  00000000  000011dc  2**0
+  9 .debug_str    00000393  00000000  00000000  000013c4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000056  00000000  00000000  00001552  2**0
+ 10 .debug_loc    000000cb  00000000  00000000  00001757  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000020  00000000  00000000  000015a8  2**0
+ 11 .debug_ranges 00000030  00000000  00000000  00001822  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -45,7 +45,7 @@ Disassembly of section .text:
   2c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
   30:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
   34:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
-  38:	0c 94 4b 00 	jmp	0x96	; 0x96 <__vector_14>
+  38:	0c 94 5d 00 	jmp	0xba	; 0xba <__vector_14>
   3c:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
   40:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
   44:	0c 94 49 00 	jmp	0x92	; 0x92 <__bad_interrupt>
@@ -70,7 +70,7 @@ Disassembly of section .text:
   74:	11 e0       	ldi	r17, 0x01	; 1
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
-  7a:	e4 e0       	ldi	r30, 0x04	; 4
+  7a:	e0 e5       	ldi	r30, 0x50	; 80
   7c:	f1 e0       	ldi	r31, 0x01	; 1
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
@@ -78,98 +78,142 @@ Disassembly of section .text:
   84:	a2 30       	cpi	r26, 0x02	; 2
   86:	b1 07       	cpc	r27, r17
   88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
-  8a:	0e 94 79 00 	call	0xf2	; 0xf2 <main>
-  8e:	0c 94 80 00 	jmp	0x100	; 0x100 <_exit>
+  8a:	0e 94 9f 00 	call	0x13e	; 0x13e <main>
+  8e:	0c 94 a6 00 	jmp	0x14c	; 0x14c <_exit>
 
 00000092 <__bad_interrupt>:
   92:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
-00000096 <__vector_14>:
+00000096 <timer0_init>:
+void USART0_init(){
+	//voir tableau excel pour calcul BAUD
+	UBRR0H = (ubrr>>8);
+	UBRR0L = (ubrr);
+	UCSR0B = 0x98;//1 0 0 1 1 0? 0? 0?
+	UCSR0C = 0x06;//00 00 0 1 1 0
+  96:	14 bc       	out	0x24, r1	; 36
+  98:	81 e0       	ldi	r24, 0x01	; 1
+  9a:	85 bd       	out	0x25, r24	; 37
+  9c:	16 bc       	out	0x26, r1	; 38
+  9e:	86 ef       	ldi	r24, 0xF6	; 246
+  a0:	87 bd       	out	0x27, r24	; 39
+  a2:	82 e0       	ldi	r24, 0x02	; 2
+  a4:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <__DATA_REGION_ORIGIN__+0xe>
+  a8:	08 95       	ret
 
-//variable permettant de baisser la frequence de l'interruption TIMER0_COMPA (registre 8 bit trop court)
-volatile uint16_t var_clk=1;
+000000aa <USART0_send>:
+}
+
+void USART0_send(unsigned int data)
+{
+	while (!( UCSR0A & (1<<UDRE0)));
+  aa:	e0 ec       	ldi	r30, 0xC0	; 192
+  ac:	f0 e0       	ldi	r31, 0x00	; 0
+  ae:	90 81       	ld	r25, Z
+  b0:	95 ff       	sbrs	r25, 5
+  b2:	fd cf       	rjmp	.-6      	; 0xae <USART0_send+0x4>
+	UDR0=data;
+  b4:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__DATA_REGION_ORIGIN__+0x66>
+  b8:	08 95       	ret
+
+000000ba <__vector_14>:
+}
+
 
 
 ISR (TIMER0_COMPA_vect){
-  96:	1f 92       	push	r1
-  98:	0f 92       	push	r0
-  9a:	0f b6       	in	r0, 0x3f	; 63
-  9c:	0f 92       	push	r0
-  9e:	11 24       	eor	r1, r1
-  a0:	2f 93       	push	r18
-  a2:	8f 93       	push	r24
-  a4:	9f 93       	push	r25
+  ba:	1f 92       	push	r1
+  bc:	0f 92       	push	r0
+  be:	0f b6       	in	r0, 0x3f	; 63
+  c0:	0f 92       	push	r0
+  c2:	11 24       	eor	r1, r1
+  c4:	2f 93       	push	r18
+  c6:	3f 93       	push	r19
+  c8:	4f 93       	push	r20
+  ca:	5f 93       	push	r21
+  cc:	6f 93       	push	r22
+  ce:	7f 93       	push	r23
+  d0:	8f 93       	push	r24
+  d2:	9f 93       	push	r25
+  d4:	af 93       	push	r26
+  d6:	bf 93       	push	r27
+  d8:	ef 93       	push	r30
+  da:	ff 93       	push	r31
 	
 	if(++var_clk>=65500){
-  a6:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
-  aa:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
-  ae:	01 96       	adiw	r24, 0x01	; 1
-  b0:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__data_start+0x1>
-  b4:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__data_start>
-  b8:	8c 3d       	cpi	r24, 0xDC	; 220
-  ba:	9f 4f       	sbci	r25, 0xFF	; 255
-  bc:	40 f0       	brcs	.+16     	; 0xce <__vector_14+0x38>
-		PORTC^=DEBUG_LED;
-  be:	98 b1       	in	r25, 0x08	; 8
-  c0:	80 e2       	ldi	r24, 0x20	; 32
-  c2:	89 27       	eor	r24, r25
-  c4:	88 b9       	out	0x08, r24	; 8
+  dc:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+  e0:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+  e4:	01 96       	adiw	r24, 0x01	; 1
+  e6:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__data_start+0x1>
+  ea:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__data_start>
+  ee:	8c 3d       	cpi	r24, 0xDC	; 220
+  f0:	9f 4f       	sbci	r25, 0xFF	; 255
+  f2:	a0 f0       	brcs	.+40     	; 0x11c <__vector_14+0x62>
+		PORTC^=DEBUG_LED; //clignotement de la LED de debug
+  f4:	98 b1       	in	r25, 0x08	; 8
+  f6:	80 e2       	ldi	r24, 0x20	; 32
+  f8:	89 27       	eor	r24, r25
+  fa:	88 b9       	out	0x08, r24	; 8
+		
+		USART0_send('a');
+  fc:	81 e6       	ldi	r24, 0x61	; 97
+  fe:	90 e0       	ldi	r25, 0x00	; 0
+ 100:	0e 94 55 00 	call	0xaa	; 0xaa <USART0_send>
+		USART0_send('b');
+ 104:	82 e6       	ldi	r24, 0x62	; 98
+ 106:	90 e0       	ldi	r25, 0x00	; 0
+ 108:	0e 94 55 00 	call	0xaa	; 0xaa <USART0_send>
+		USART0_send('c');
+ 10c:	83 e6       	ldi	r24, 0x63	; 99
+ 10e:	90 e0       	ldi	r25, 0x00	; 0
+ 110:	0e 94 55 00 	call	0xaa	; 0xaa <USART0_send>
+		
 		var_clk=0;
-  c6:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <__data_start+0x1>
-  ca:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__data_start>
+ 114:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <__data_start+0x1>
+ 118:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <__data_start>
 	}
+	
+
 }
-  ce:	9f 91       	pop	r25
-  d0:	8f 91       	pop	r24
-  d2:	2f 91       	pop	r18
-  d4:	0f 90       	pop	r0
-  d6:	0f be       	out	0x3f, r0	; 63
-  d8:	0f 90       	pop	r0
-  da:	1f 90       	pop	r1
-  dc:	18 95       	reti
+ 11c:	ff 91       	pop	r31
+ 11e:	ef 91       	pop	r30
+ 120:	bf 91       	pop	r27
+ 122:	af 91       	pop	r26
+ 124:	9f 91       	pop	r25
+ 126:	8f 91       	pop	r24
+ 128:	7f 91       	pop	r23
+ 12a:	6f 91       	pop	r22
+ 12c:	5f 91       	pop	r21
+ 12e:	4f 91       	pop	r20
+ 130:	3f 91       	pop	r19
+ 132:	2f 91       	pop	r18
+ 134:	0f 90       	pop	r0
+ 136:	0f be       	out	0x3f, r0	; 63
+ 138:	0f 90       	pop	r0
+ 13a:	1f 90       	pop	r1
+ 13c:	18 95       	reti
 
-000000de <timer0_init>:
-Voir details des calculs dans le tableau Excel
-*/
-void timer0_init(){
-	//init timer interrupt pour led debug
-	//timer 0 (8 bits ""malheureusement"")
-	TCCR0A=0x00; //00 00 -- 00
-  de:	14 bc       	out	0x24, r1	; 36
-	TCCR0B=0x01; //0 0 -- 0 01 (/1024 prescaler)
-  e0:	81 e0       	ldi	r24, 0x01	; 1
-  e2:	85 bd       	out	0x25, r24	; 37
-	TCNT0=0; // (init) ?
-  e4:	16 bc       	out	0x26, r1	; 38
-	OCR0A=246; //valeur à comparer avec TCNT0 pour générer inter
-  e6:	86 ef       	ldi	r24, 0xF6	; 246
-  e8:	87 bd       	out	0x27, r24	; 39
-	TIMSK0=0x02; //----- 010 gestion de l'interruption generé par timer0 (3 interuptions possibles)
-  ea:	82 e0       	ldi	r24, 0x02	; 2
-  ec:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <__TEXT_REGION_LENGTH__+0x7e006e>
-  f0:	08 95       	ret
-
-000000f2 <main>:
+0000013e <main>:
 
 
 int main(void)
 {
 	//Init port C:
 	DDRC = DEBUG_LED; //definition de la direction des pins du poirt C
-  f2:	80 e2       	ldi	r24, 0x20	; 32
-  f4:	87 b9       	out	0x07, r24	; 7
+ 13e:	80 e2       	ldi	r24, 0x20	; 32
+ 140:	87 b9       	out	0x07, r24	; 7
 	PORTC = DEBUG_LED; //extinction/allumage des ports C
-  f6:	88 b9       	out	0x08, r24	; 8
+ 142:	88 b9       	out	0x08, r24	; 8
 	
 	//init interrupt
 	sei(); //activation interruptions global
-  f8:	78 94       	sei
+ 144:	78 94       	sei
 	timer0_init(); //init du timer
-  fa:	0e 94 6f 00 	call	0xde	; 0xde <timer0_init>
-  fe:	ff cf       	rjmp	.-2      	; 0xfe <main+0xc>
+ 146:	0e 94 4b 00 	call	0x96	; 0x96 <timer0_init>
+ 14a:	ff cf       	rjmp	.-2      	; 0x14a <main+0xc>
 
-00000100 <_exit>:
- 100:	f8 94       	cli
+0000014c <_exit>:
+ 14c:	f8 94       	cli
 
-00000102 <__stop_program>:
- 102:	ff cf       	rjmp	.-2      	; 0x102 <__stop_program>
+0000014e <__stop_program>:
+ 14e:	ff cf       	rjmp	.-2      	; 0x14e <__stop_program>

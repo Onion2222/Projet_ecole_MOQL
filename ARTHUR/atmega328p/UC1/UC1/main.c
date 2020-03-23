@@ -15,18 +15,7 @@
 volatile uint16_t var_clk=1;
 
 
-ISR (TIMER0_COMPA_vect){
-	
-	if(++var_clk>=65500){
-		PORTC^=DEBUG_LED; //clignotement de la LED de debug
-		var_clk=0;
-		USART0_send(65);
-		USART0_send(66);
-		USART0_send(67);
-	}
-	
 
-}
 
 
 
@@ -57,11 +46,29 @@ void USART0_init(){
 
 void USART0_send(unsigned int data)
 {
-	/* Wait for empty transmit buffer */
-	while (!(UCSR0A & (1<<UDRE0))));
-	/* Put data into buffer, sends the data */
-	UDR0 = data;
+	while (!( UCSR0A & (1<<UDRE0)));
+	UDR0=data;
 }
+
+
+
+ISR (TIMER0_COMPA_vect){
+	
+	if(++var_clk>=65500){
+		PORTC^=DEBUG_LED; //clignotement de la LED de debug
+		
+		USART0_send('a');
+		USART0_send('b');
+		USART0_send('c');
+		
+		var_clk=0;
+	}
+	
+
+}
+
+
+
 
 
 int main(void)
