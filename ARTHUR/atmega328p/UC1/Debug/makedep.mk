@@ -6,6 +6,8 @@ moteurs.c
 
 PWM.c
 
+SPI.c
+
 timer.c
 
 UART.c

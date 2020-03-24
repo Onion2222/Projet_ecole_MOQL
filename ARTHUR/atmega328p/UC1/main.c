@@ -13,6 +13,7 @@
 #include "UART.h"
 #include "timer.h"
 #include "moteurs.h"
+#include "SPI.h"
 
 #define F_CPU 16000000UL
 #define DEBUG_LED (1<<DDC5)
@@ -28,11 +29,19 @@ volatile uint16_t vitesse=800;
 
 ISR (TIMER0_COMPA_vect){
 	if(++var_clk>=80){//execution toutes les secondes
-		if(heartbeat==1){
+		
+		if(heartbeat==1){ //heartbeat, pour savoir si toutes les composantes du systemes sont OP
 			PORTC^=DEBUG_LED; //clignotement de la LED de debug
 			USART0_sendByte('*'); //envoie d'un heartbeat à l'UART
+			
+			//Heartbeat du salve SPI
+			if(SPI_MasterEnvoieReception(0x01)==0x05){ //envoie de 0x01 (0x02 ACK)
+				USART0_sendByte('^'); //envoie de '^' pour heartbeat de salve SPI
+			}
+			
 			var_clk=0;
 		}
+		
 	}
 }
 
@@ -54,23 +63,7 @@ ISR(USART_RX_vect){
 
 	//analyseur syntaxique
 	/*Commandes:
-	
-	SYSTEME:
-	a -> commutation heartbeat (cligno LED + envoie '*' UART) ON/OFF
-	e -> etat du robot (ISP Capt_IR niveau batterie) => UART est forcement bon :D
-	
-	MOTEUR:
-	+ -> augmentation vitesse
-	- -> diminuation vitesse
-	z -> avance
-	q -> tourne gauche
-	d -> tourne droite
-	s -> recule
-	FONCTIONNEMENT:
-	q/d -> si tourne deja arret du robot
-	z/s -> si avance/recule deja arret du robot
-	z|s puis q|d -> avance/recule puis tourne
-	q|d puis z|s -> tourne puis avance/recule
+		voir tableau excel pour la liste des commandes
 
 	*/
 	switch (ByteLu)
@@ -126,6 +119,22 @@ ISR(USART_RX_vect){
 		if(PWM_getA()>0) PWM_setA(vitesse);
 		if(PWM_getB()>0) PWM_setB(vitesse);
 		break;
+		
+		
+		//commande envoie SPI slave
+		case 'p':
+		SPI_MasterEnvoie(0xB); //arret balayage
+		SPI_MasterEnvoie(0xC);
+		break;
+		
+		case 'm':
+		SPI_MasterEnvoie(0xB); //arret balayage
+		SPI_MasterEnvoie(0xD);
+		break;
+		
+		case 'l':
+		SPI_MasterEnvoie(0x6); //toggle balayage
+		break;
 
 		default:
 		USART0_sendByte('>');
@@ -147,15 +156,18 @@ int main(void)
 	
 	//init interrupt
 	sei(); //activation interruptions global
-	timer0_init(195); //init du timer
+	
 	USART0_init(103); //init UART à 9600 Baud
-	PWM_init(); //init PWM sur timer1
+	USART0_sendString("Demarrage du robot...");
 	
-	USART0_sendString("Demarrage du robot");
-
+	timer0_init(195); //init du timer
 	
-	//PWM_start();
-	moteur_init();
+	moteur_init(); //init du PWM et des PINs moteurs
+	
+	SPI_init(); //init de la com SPI
+	
+	USART0_sendString("...OK!");
+	
 	
 	for(;;);
 }

@@ -31,6 +31,7 @@ volatile uint8_t commutAvance=0;
   Initialise les pins definissant le sens du moteur
 */
 void moteur_init(){
+	PWM_init(); //init PWM sur timer1
 	DDRB|=0x01;//
 	DDRD|=0x80;//
 	Gavance; //init sense
