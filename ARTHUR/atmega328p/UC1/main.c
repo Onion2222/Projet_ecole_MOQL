@@ -181,8 +181,6 @@ int main(void)
 	DDRC = DEBUG_LED; //definition de la direction des pins du poirt C
 	PORTC = DEBUG_LED; //extinction/allumage des ports C
 	
-	//init interrupt
-	sei(); //activation interruptions global
 	
 	USART0_init(103); //init UART à 9600 Baud
 	USART0_sendString("Demarrage du robot...");
@@ -194,6 +192,8 @@ int main(void)
 	SPI_init(); //init de la com SPI
 	
 	USART0_sendString("...OK!");
+	
+	sei(); //activation interruptions global
 	
 	
 	for(;;);
