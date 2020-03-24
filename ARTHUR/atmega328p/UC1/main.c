@@ -20,9 +20,11 @@
 
 
 //variable permettant de baisser la frequence de l'interruption TIMER0_COMPA (registre 8 bit trop court)
-volatile uint16_t var_clk=1;
+volatile uint8_t var_clk=0;
+volatile uint8_t var_t_acq_IR=0;
 volatile uint8_t heartbeat=1;
 volatile uint16_t vitesse=800;
+volatile uint8_t override_obst=0;
 
 
 
@@ -42,6 +44,24 @@ ISR (TIMER0_COMPA_vect){
 			var_clk=0;
 		}
 		
+	}
+	if(++var_t_acq_IR>=8){ //toutes les 0,1sec
+		//rapport d'état slave SPI
+		if(SPI_MasterEnvoieReception(0x09)==0X02){ //si obstacle/erreur => voir tableau excel
+			//get position capteur IR
+			uint8_t angle =SPI_MasterEnvoieReception(0x0E); //voir tableau excel
+			uint8_t mesure =SPI_MasterEnvoieReception(0x04); //voir tableau excel
+			USART0_sendString("Obstacle position: {");
+			USART0_sendByte(angle);
+			USART0_sendByte(',');
+			USART0_sendByte(mesure);
+			USART0_sendString("}");
+			if(!override_obst){
+				stop();
+			}
+		}
+		var_t_acq_IR=0;
+
 	}
 }
 
@@ -135,6 +155,13 @@ ISR(USART_RX_vect){
 		case 'l':
 		SPI_MasterEnvoie(0x6); //toggle balayage
 		break;
+		
+		case 'o':
+		override_obst=override_obst^1; //toggle override
+		if(override_obst) USART0_sendString("Les obstacles ne seront plus traite");
+		else USART0_sendString("Les obstacles seront maintenant traite");
+		break;
+
 
 		default:
 		USART0_sendByte('>');

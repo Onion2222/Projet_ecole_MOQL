@@ -3,31 +3,31 @@ UC1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000072  00800100  000005ea  0000067e  2**0
+  0 .data         000000d2  00800100  00000666  000006fa  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         000005ea  00000000  00000000  00000094  2**1
+  1 .text         00000666  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000002  00800172  00800172  000006f0  2**0
+  2 .bss          00000005  008001d2  008001d2  000007cc  2**0
                   ALLOC
-  3 .comment      00000060  00000000  00000000  000006f0  2**0
+  3 .comment      00000060  00000000  00000000  000007cc  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000750  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000082c  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000148  00000000  00000000  00000790  2**0
+  5 .debug_aranges 00000148  00000000  00000000  0000086c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000109c  00000000  00000000  000008d8  2**0
+  6 .debug_info   000011e7  00000000  00000000  000009b4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000009d5  00000000  00000000  00001974  2**0
+  7 .debug_abbrev 000009e0  00000000  00000000  00001b9b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000009f8  00000000  00000000  00002349  2**0
+  8 .debug_line   00000a5f  00000000  00000000  0000257b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000002e0  00000000  00000000  00002d44  2**2
+  9 .debug_frame  000002e8  00000000  00000000  00002fdc  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000590  00000000  00000000  00003024  2**0
+ 10 .debug_str    000005b8  00000000  00000000  000032c4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000663  00000000  00000000  000035b4  2**0
+ 11 .debug_loc    000006cf  00000000  00000000  0000387c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000e8  00000000  00000000  00003c17  2**0
+ 12 .debug_ranges 000000e8  00000000  00000000  00003f4b  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -51,7 +51,7 @@ Disassembly of section .text:
   3c:	0c 94 a1 00 	jmp	0x142	; 0x142 <__bad_interrupt>
   40:	0c 94 a1 00 	jmp	0x142	; 0x142 <__bad_interrupt>
   44:	0c 94 a1 00 	jmp	0x142	; 0x142 <__bad_interrupt>
-  48:	0c 94 07 02 	jmp	0x40e	; 0x40e <__vector_18>
+  48:	0c 94 31 02 	jmp	0x462	; 0x462 <__vector_18>
   4c:	0c 94 a1 00 	jmp	0x142	; 0x142 <__bad_interrupt>
   50:	0c 94 a1 00 	jmp	0x142	; 0x142 <__bad_interrupt>
   54:	0c 94 a1 00 	jmp	0x142	; 0x142 <__bad_interrupt>
@@ -59,86 +59,86 @@ Disassembly of section .text:
   5c:	0c 94 a1 00 	jmp	0x142	; 0x142 <__bad_interrupt>
   60:	0c 94 a1 00 	jmp	0x142	; 0x142 <__bad_interrupt>
   64:	0c 94 a1 00 	jmp	0x142	; 0x142 <__bad_interrupt>
-  68:	5c 02       	muls	r21, r28
-  6a:	b9 02       	muls	r27, r25
-  6c:	82 02       	muls	r24, r18
-  6e:	b9 02       	muls	r27, r25
-  70:	b9 02       	muls	r27, r25
-  72:	b9 02       	muls	r27, r25
-  74:	b9 02       	muls	r27, r25
-  76:	b9 02       	muls	r27, r25
-  78:	b9 02       	muls	r27, r25
-  7a:	b9 02       	muls	r27, r25
-  7c:	b9 02       	muls	r27, r25
-  7e:	b9 02       	muls	r27, r25
-  80:	b9 02       	muls	r27, r25
-  82:	b9 02       	muls	r27, r25
-  84:	b9 02       	muls	r27, r25
-  86:	b9 02       	muls	r27, r25
-  88:	b9 02       	muls	r27, r25
-  8a:	b9 02       	muls	r27, r25
-  8c:	b9 02       	muls	r27, r25
-  8e:	b9 02       	muls	r27, r25
-  90:	b9 02       	muls	r27, r25
-  92:	b9 02       	muls	r27, r25
-  94:	b9 02       	muls	r27, r25
-  96:	b9 02       	muls	r27, r25
-  98:	b9 02       	muls	r27, r25
-  9a:	b9 02       	muls	r27, r25
-  9c:	b9 02       	muls	r27, r25
-  9e:	b9 02       	muls	r27, r25
-  a0:	b9 02       	muls	r27, r25
-  a2:	b9 02       	muls	r27, r25
-  a4:	b9 02       	muls	r27, r25
-  a6:	b9 02       	muls	r27, r25
-  a8:	b9 02       	muls	r27, r25
-  aa:	b9 02       	muls	r27, r25
-  ac:	b9 02       	muls	r27, r25
-  ae:	b9 02       	muls	r27, r25
-  b0:	b9 02       	muls	r27, r25
-  b2:	b9 02       	muls	r27, r25
-  b4:	b9 02       	muls	r27, r25
-  b6:	b9 02       	muls	r27, r25
-  b8:	b9 02       	muls	r27, r25
-  ba:	b9 02       	muls	r27, r25
-  bc:	b9 02       	muls	r27, r25
-  be:	b9 02       	muls	r27, r25
-  c0:	b9 02       	muls	r27, r25
-  c2:	b9 02       	muls	r27, r25
-  c4:	b9 02       	muls	r27, r25
-  c6:	b9 02       	muls	r27, r25
-  c8:	b9 02       	muls	r27, r25
-  ca:	b9 02       	muls	r27, r25
-  cc:	b9 02       	muls	r27, r25
-  ce:	b9 02       	muls	r27, r25
-  d0:	b9 02       	muls	r27, r25
-  d2:	b9 02       	muls	r27, r25
-  d4:	27 02       	muls	r18, r23
-  d6:	b9 02       	muls	r27, r25
-  d8:	b9 02       	muls	r27, r25
-  da:	4e 02       	muls	r20, r30
-  dc:	3b 02       	muls	r19, r27
-  de:	b9 02       	muls	r27, r25
-  e0:	b9 02       	muls	r27, r25
-  e2:	b9 02       	muls	r27, r25
-  e4:	b9 02       	muls	r27, r25
-  e6:	b9 02       	muls	r27, r25
-  e8:	b9 02       	muls	r27, r25
-  ea:	b5 02       	muls	r27, r21
-  ec:	ae 02       	muls	r26, r30
-  ee:	b9 02       	muls	r27, r25
-  f0:	b9 02       	muls	r27, r25
-  f2:	a7 02       	muls	r26, r23
-  f4:	47 02       	muls	r20, r23
-  f6:	b9 02       	muls	r27, r25
-  f8:	55 02       	muls	r21, r21
-  fa:	b9 02       	muls	r27, r25
-  fc:	b9 02       	muls	r27, r25
-  fe:	b9 02       	muls	r27, r25
- 100:	b9 02       	muls	r27, r25
- 102:	b9 02       	muls	r27, r25
- 104:	b9 02       	muls	r27, r25
- 106:	40 02       	muls	r20, r16
+  68:	86 02       	muls	r24, r22
+  6a:	f7 02       	muls	r31, r23
+  6c:	ac 02       	muls	r26, r28
+  6e:	f7 02       	muls	r31, r23
+  70:	f7 02       	muls	r31, r23
+  72:	f7 02       	muls	r31, r23
+  74:	f7 02       	muls	r31, r23
+  76:	f7 02       	muls	r31, r23
+  78:	f7 02       	muls	r31, r23
+  7a:	f7 02       	muls	r31, r23
+  7c:	f7 02       	muls	r31, r23
+  7e:	f7 02       	muls	r31, r23
+  80:	f7 02       	muls	r31, r23
+  82:	f7 02       	muls	r31, r23
+  84:	f7 02       	muls	r31, r23
+  86:	f7 02       	muls	r31, r23
+  88:	f7 02       	muls	r31, r23
+  8a:	f7 02       	muls	r31, r23
+  8c:	f7 02       	muls	r31, r23
+  8e:	f7 02       	muls	r31, r23
+  90:	f7 02       	muls	r31, r23
+  92:	f7 02       	muls	r31, r23
+  94:	f7 02       	muls	r31, r23
+  96:	f7 02       	muls	r31, r23
+  98:	f7 02       	muls	r31, r23
+  9a:	f7 02       	muls	r31, r23
+  9c:	f7 02       	muls	r31, r23
+  9e:	f7 02       	muls	r31, r23
+  a0:	f7 02       	muls	r31, r23
+  a2:	f7 02       	muls	r31, r23
+  a4:	f7 02       	muls	r31, r23
+  a6:	f7 02       	muls	r31, r23
+  a8:	f7 02       	muls	r31, r23
+  aa:	f7 02       	muls	r31, r23
+  ac:	f7 02       	muls	r31, r23
+  ae:	f7 02       	muls	r31, r23
+  b0:	f7 02       	muls	r31, r23
+  b2:	f7 02       	muls	r31, r23
+  b4:	f7 02       	muls	r31, r23
+  b6:	f7 02       	muls	r31, r23
+  b8:	f7 02       	muls	r31, r23
+  ba:	f7 02       	muls	r31, r23
+  bc:	f7 02       	muls	r31, r23
+  be:	f7 02       	muls	r31, r23
+  c0:	f7 02       	muls	r31, r23
+  c2:	f7 02       	muls	r31, r23
+  c4:	f7 02       	muls	r31, r23
+  c6:	f7 02       	muls	r31, r23
+  c8:	f7 02       	muls	r31, r23
+  ca:	f7 02       	muls	r31, r23
+  cc:	f7 02       	muls	r31, r23
+  ce:	f7 02       	muls	r31, r23
+  d0:	f7 02       	muls	r31, r23
+  d2:	f7 02       	muls	r31, r23
+  d4:	51 02       	muls	r21, r17
+  d6:	f7 02       	muls	r31, r23
+  d8:	f7 02       	muls	r31, r23
+  da:	78 02       	muls	r23, r24
+  dc:	65 02       	muls	r22, r21
+  de:	f7 02       	muls	r31, r23
+  e0:	f7 02       	muls	r31, r23
+  e2:	f7 02       	muls	r31, r23
+  e4:	f7 02       	muls	r31, r23
+  e6:	f7 02       	muls	r31, r23
+  e8:	f7 02       	muls	r31, r23
+  ea:	df 02       	muls	r29, r31
+  ec:	d8 02       	muls	r29, r24
+  ee:	f7 02       	muls	r31, r23
+  f0:	e3 02       	muls	r30, r19
+  f2:	d1 02       	muls	r29, r17
+  f4:	71 02       	muls	r23, r17
+  f6:	f7 02       	muls	r31, r23
+  f8:	7f 02       	muls	r23, r31
+  fa:	f7 02       	muls	r31, r23
+  fc:	f7 02       	muls	r31, r23
+  fe:	f7 02       	muls	r31, r23
+ 100:	f7 02       	muls	r31, r23
+ 102:	f7 02       	muls	r31, r23
+ 104:	f7 02       	muls	r31, r23
+ 106:	6a 02       	muls	r22, r26
 
 00000108 <__ctors_end>:
  108:	11 24       	eor	r1, r1
@@ -152,18 +152,18 @@ Disassembly of section .text:
  114:	11 e0       	ldi	r17, 0x01	; 1
  116:	a0 e0       	ldi	r26, 0x00	; 0
  118:	b1 e0       	ldi	r27, 0x01	; 1
- 11a:	ea ee       	ldi	r30, 0xEA	; 234
- 11c:	f5 e0       	ldi	r31, 0x05	; 5
+ 11a:	e6 e6       	ldi	r30, 0x66	; 102
+ 11c:	f6 e0       	ldi	r31, 0x06	; 6
  11e:	02 c0       	rjmp	.+4      	; 0x124 <__do_copy_data+0x10>
  120:	05 90       	lpm	r0, Z+
  122:	0d 92       	st	X+, r0
- 124:	a2 37       	cpi	r26, 0x72	; 114
+ 124:	a2 3d       	cpi	r26, 0xD2	; 210
  126:	b1 07       	cpc	r27, r17
  128:	d9 f7       	brne	.-10     	; 0x120 <__do_copy_data+0xc>
 
 0000012a <__do_clear_bss>:
  12a:	21 e0       	ldi	r18, 0x01	; 1
- 12c:	a2 e7       	ldi	r26, 0x72	; 114
+ 12c:	a2 ed       	ldi	r26, 0xD2	; 210
  12e:	b1 e0       	ldi	r27, 0x01	; 1
  130:	01 c0       	rjmp	.+2      	; 0x134 <.do_clear_bss_start>
 
@@ -171,249 +171,183 @@ Disassembly of section .text:
  132:	1d 92       	st	X+, r1
 
 00000134 <.do_clear_bss_start>:
- 134:	a4 37       	cpi	r26, 0x74	; 116
+ 134:	a7 3d       	cpi	r26, 0xD7	; 215
  136:	b2 07       	cpc	r27, r18
  138:	e1 f7       	brne	.-8      	; 0x132 <.do_clear_bss_loop>
- 13a:	0e 94 d5 02 	call	0x5aa	; 0x5aa <main>
- 13e:	0c 94 f3 02 	jmp	0x5e6	; 0x5e6 <_exit>
+ 13a:	0e 94 13 03 	call	0x626	; 0x626 <main>
+ 13e:	0c 94 31 03 	jmp	0x662	; 0x662 <_exit>
 
 00000142 <__bad_interrupt>:
  142:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000146 <moteur_init>:
-
-/*
-  Initialise les pins definissant le sens du moteur
-*/
-void moteur_init(){
-	PWM_init(); //init PWM sur timer1
  146:	0e 94 19 01 	call	0x232	; 0x232 <PWM_init>
-	DDRB|=0x01;//
  14a:	20 9a       	sbi	0x04, 0	; 4
-	DDRD|=0x80;//
  14c:	57 9a       	sbi	0x0a, 7	; 10
-	Gavance; //init sense
  14e:	5f 9a       	sbi	0x0b, 7	; 11
-	Davance; //init sense
  150:	28 9a       	sbi	0x05, 0	; 5
  152:	08 95       	ret
 
 00000154 <stop>:
-/*
-Baisse le rapport cyclique à 0%
-!! N'arrete pas le PWM => utiliser PWM_stop();
-*/
-void stop(){
-	commutTourne=0;
- 154:	10 92 73 01 	sts	0x0173, r1	; 0x800173 <commutTourne>
-	commutAvance=0;
- 158:	10 92 72 01 	sts	0x0172, r1	; 0x800172 <__data_end>
-	//roue G osef
-	Gavance;
+ 154:	10 92 d3 01 	sts	0x01D3, r1	; 0x8001d3 <commutTourne>
+ 158:	10 92 d2 01 	sts	0x01D2, r1	; 0x8001d2 <__data_end>
  15c:	5f 9a       	sbi	0x0b, 7	; 11
-	//roue D osef
-	Davance;
  15e:	28 9a       	sbi	0x05, 0	; 5
-	PWM_setA(0);
  160:	80 e0       	ldi	r24, 0x00	; 0
  162:	90 e0       	ldi	r25, 0x00	; 0
  164:	0e 94 46 01 	call	0x28c	; 0x28c <PWM_setA>
-	PWM_setB(0);
  168:	80 e0       	ldi	r24, 0x00	; 0
  16a:	90 e0       	ldi	r25, 0x00	; 0
  16c:	0e 94 57 01 	call	0x2ae	; 0x2ae <PWM_setB>
  170:	08 95       	ret
 
 00000172 <avancer_toggle>:
- param: vitesse (10bits)
- vitesse du robot
- 1: si avance/recule deja STOP
- 2: sinon avancer
-*/
-void avancer_toggle(uint16_t vitesse){
  172:	cf 93       	push	r28
  174:	df 93       	push	r29
  176:	ec 01       	movw	r28, r24
-	if(commutAvance){
- 178:	80 91 72 01 	lds	r24, 0x0172	; 0x800172 <__data_end>
+ 178:	80 91 d2 01 	lds	r24, 0x01D2	; 0x8001d2 <__data_end>
  17c:	88 23       	and	r24, r24
  17e:	19 f0       	breq	.+6      	; 0x186 <avancer_toggle+0x14>
-		stop();
  180:	0e 94 aa 00 	call	0x154	; 0x154 <stop>
  184:	0b c0       	rjmp	.+22     	; 0x19c <avancer_toggle+0x2a>
-	}else{
-		commutAvance=1;
  186:	81 e0       	ldi	r24, 0x01	; 1
- 188:	80 93 72 01 	sts	0x0172, r24	; 0x800172 <__data_end>
-		//roue G avancer
-		Gavance;
+ 188:	80 93 d2 01 	sts	0x01D2, r24	; 0x8001d2 <__data_end>
  18c:	5f 9a       	sbi	0x0b, 7	; 11
-		//roue D avancer
-		Davance;
  18e:	28 9a       	sbi	0x05, 0	; 5
-		PWM_setA(vitesse);
  190:	ce 01       	movw	r24, r28
  192:	0e 94 46 01 	call	0x28c	; 0x28c <PWM_setA>
-		PWM_setB(vitesse);
  196:	ce 01       	movw	r24, r28
  198:	0e 94 57 01 	call	0x2ae	; 0x2ae <PWM_setB>
-	}
-}
  19c:	df 91       	pop	r29
  19e:	cf 91       	pop	r28
  1a0:	08 95       	ret
 
 000001a2 <reculer_toggle>:
- param: vitesse (10bits)
- vitesse du robot
- 1: si avance/recule deja STOP
- 2: sinon reculer
-*/
-void reculer_toggle(uint16_t vitesse){
  1a2:	cf 93       	push	r28
  1a4:	df 93       	push	r29
  1a6:	ec 01       	movw	r28, r24
-	if(commutAvance){
- 1a8:	80 91 72 01 	lds	r24, 0x0172	; 0x800172 <__data_end>
+ 1a8:	80 91 d2 01 	lds	r24, 0x01D2	; 0x8001d2 <__data_end>
  1ac:	88 23       	and	r24, r24
  1ae:	19 f0       	breq	.+6      	; 0x1b6 <reculer_toggle+0x14>
-		stop();
  1b0:	0e 94 aa 00 	call	0x154	; 0x154 <stop>
  1b4:	0b c0       	rjmp	.+22     	; 0x1cc <reculer_toggle+0x2a>
-	}else{
-		commutAvance=1;
  1b6:	81 e0       	ldi	r24, 0x01	; 1
- 1b8:	80 93 72 01 	sts	0x0172, r24	; 0x800172 <__data_end>
-		//roue G reculer
-		Grecule;
+ 1b8:	80 93 d2 01 	sts	0x01D2, r24	; 0x8001d2 <__data_end>
  1bc:	5f 98       	cbi	0x0b, 7	; 11
-		//roue D reculer
-		Drecule;
  1be:	28 98       	cbi	0x05, 0	; 5
-		PWM_setA(vitesse);
  1c0:	ce 01       	movw	r24, r28
  1c2:	0e 94 46 01 	call	0x28c	; 0x28c <PWM_setA>
-		PWM_setB(vitesse);
  1c6:	ce 01       	movw	r24, r28
  1c8:	0e 94 57 01 	call	0x2ae	; 0x2ae <PWM_setB>
-	}
-}
  1cc:	df 91       	pop	r29
  1ce:	cf 91       	pop	r28
  1d0:	08 95       	ret
 
 000001d2 <tournerGauche_toggle>:
-Fonctionnement du toogle
-1: si tourne deja (dans un sens ou dans l'autre) STOP
-2: sinon tourner à gauche
-param: vitesse (10bits)
-*/
-void tournerGauche_toggle(uint16_t vitesse){
  1d2:	cf 93       	push	r28
  1d4:	df 93       	push	r29
  1d6:	ec 01       	movw	r28, r24
-	if (commutTourne){ //si tourne deja
- 1d8:	80 91 73 01 	lds	r24, 0x0173	; 0x800173 <commutTourne>
+ 1d8:	80 91 d3 01 	lds	r24, 0x01D3	; 0x8001d3 <commutTourne>
  1dc:	88 23       	and	r24, r24
  1de:	19 f0       	breq	.+6      	; 0x1e6 <tournerGauche_toggle+0x14>
-		stop();
  1e0:	0e 94 aa 00 	call	0x154	; 0x154 <stop>
  1e4:	0b c0       	rjmp	.+22     	; 0x1fc <tournerGauche_toggle+0x2a>
-	}else{
-		commutTourne=1;
  1e6:	81 e0       	ldi	r24, 0x01	; 1
- 1e8:	80 93 73 01 	sts	0x0173, r24	; 0x800173 <commutTourne>
-		//tourne
-		//roue G reculer
-		Grecule;
+ 1e8:	80 93 d3 01 	sts	0x01D3, r24	; 0x8001d3 <commutTourne>
  1ec:	5f 98       	cbi	0x0b, 7	; 11
-		//roue D avancer
-		Davance;
  1ee:	28 9a       	sbi	0x05, 0	; 5
-		PWM_setA(vitesse);
  1f0:	ce 01       	movw	r24, r28
  1f2:	0e 94 46 01 	call	0x28c	; 0x28c <PWM_setA>
-		PWM_setB(vitesse);
  1f6:	ce 01       	movw	r24, r28
  1f8:	0e 94 57 01 	call	0x2ae	; 0x2ae <PWM_setB>
-	}
-}
  1fc:	df 91       	pop	r29
  1fe:	cf 91       	pop	r28
  200:	08 95       	ret
 
 00000202 <tournerDroite_toggle>:
-Fonctionnement du toogle
-1: si tourne deja (dans un sens ou dans l'autre) STOP
-2: sinon tourner à droite
-param: vitesse (10bits)
-*/
-void tournerDroite_toggle(uint16_t vitesse){
  202:	cf 93       	push	r28
  204:	df 93       	push	r29
  206:	ec 01       	movw	r28, r24
-	if (commutTourne){ //si tourne deja
- 208:	80 91 73 01 	lds	r24, 0x0173	; 0x800173 <commutTourne>
+ 208:	80 91 d3 01 	lds	r24, 0x01D3	; 0x8001d3 <commutTourne>
  20c:	88 23       	and	r24, r24
  20e:	19 f0       	breq	.+6      	; 0x216 <tournerDroite_toggle+0x14>
-		stop();
  210:	0e 94 aa 00 	call	0x154	; 0x154 <stop>
  214:	0b c0       	rjmp	.+22     	; 0x22c <tournerDroite_toggle+0x2a>
-	}else{
-		commutTourne=1;
  216:	81 e0       	ldi	r24, 0x01	; 1
- 218:	80 93 73 01 	sts	0x0173, r24	; 0x800173 <commutTourne>
-		//roue G avancer
-		Gavance;
+ 218:	80 93 d3 01 	sts	0x01D3, r24	; 0x8001d3 <commutTourne>
  21c:	5f 9a       	sbi	0x0b, 7	; 11
-		//roue D reculer
-		Drecule;
  21e:	28 98       	cbi	0x05, 0	; 5
-		PWM_setA(vitesse);
  220:	ce 01       	movw	r24, r28
  222:	0e 94 46 01 	call	0x28c	; 0x28c <PWM_setA>
-		PWM_setB(vitesse);
  226:	ce 01       	movw	r24, r28
  228:	0e 94 57 01 	call	0x2ae	; 0x2ae <PWM_setB>
-	}
  22c:	df 91       	pop	r29
  22e:	cf 91       	pop	r28
  230:	08 95       	ret
 
 00000232 <PWM_init>:
+
+
+//PWM sur PB1 et PB2
+void PWM_init(){
+	//PIN en output PB1 et PB2
+	DDRB |= 0x06; //0000 0110
  232:	84 b1       	in	r24, 0x04	; 4
  234:	86 60       	ori	r24, 0x06	; 6
  236:	84 b9       	out	0x04, r24	; 4
+	PORTB &= ~(0x06); //0000 0110 mise à 0L des ports
  238:	85 b1       	in	r24, 0x05	; 5
  23a:	89 7f       	andi	r24, 0xF9	; 249
  23c:	85 b9       	out	0x05, r24	; 5
+	//TCCR1A
+	// aa bb // ??
+	//aa//bb: 00 -> pas de PWM
+	//		: 11/10 -> PWM
+	//
+	TCCR1A=0x03; // ^^ ^^ -- 11(mode10bits) => ici 0000 0011=0x03 POUR fonctionnement 1010 0011=0xA3
  23e:	83 e0       	ldi	r24, 0x03	; 3
- 240:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__DATA_REGION_ORIGIN__+0x20>
+ 240:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7e0080>
+	TCCR1B=0x09; // 00(osef) - 01(mode10bits) 001(prescal) => ici 0000 1001
  244:	89 e0       	ldi	r24, 0x09	; 9
- 246:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__DATA_REGION_ORIGIN__+0x21>
+ 246:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7e0081>
  24a:	08 95       	ret
 
 0000024c <PWM_getA>:
- 24c:	20 91 88 00 	lds	r18, 0x0088	; 0x800088 <__DATA_REGION_ORIGIN__+0x28>
- 250:	80 91 89 00 	lds	r24, 0x0089	; 0x800089 <__DATA_REGION_ORIGIN__+0x29>
+	OCR1BH=(uint8_t)(OCR>>8);
+	OCR1BL=(uint8_t)OCR;
+}
+
+uint16_t PWM_getA(){
+	return OCR1AL + (OCR1AH<<8);
+ 24c:	20 91 88 00 	lds	r18, 0x0088	; 0x800088 <__TEXT_REGION_LENGTH__+0x7e0088>
+ 250:	80 91 89 00 	lds	r24, 0x0089	; 0x800089 <__TEXT_REGION_LENGTH__+0x7e0089>
  254:	90 e0       	ldi	r25, 0x00	; 0
  256:	98 2f       	mov	r25, r24
  258:	88 27       	eor	r24, r24
+}
  25a:	82 0f       	add	r24, r18
  25c:	91 1d       	adc	r25, r1
  25e:	08 95       	ret
 
 00000260 <PWM_getB>:
- 260:	20 91 8a 00 	lds	r18, 0x008A	; 0x80008a <__DATA_REGION_ORIGIN__+0x2a>
- 264:	80 91 8b 00 	lds	r24, 0x008B	; 0x80008b <__DATA_REGION_ORIGIN__+0x2b>
+
+uint16_t PWM_getB(){
+	return OCR1BL + (OCR1BH<<8);
+ 260:	20 91 8a 00 	lds	r18, 0x008A	; 0x80008a <__TEXT_REGION_LENGTH__+0x7e008a>
+ 264:	80 91 8b 00 	lds	r24, 0x008B	; 0x80008b <__TEXT_REGION_LENGTH__+0x7e008b>
  268:	90 e0       	ldi	r25, 0x00	; 0
  26a:	98 2f       	mov	r25, r24
  26c:	88 27       	eor	r24, r24
+}
  26e:	82 0f       	add	r24, r18
  270:	91 1d       	adc	r25, r1
  272:	08 95       	ret
 
 00000274 <PWM_start>:
+
+
+void PWM_start(){
+	TCCR1A|=0xA0;
  274:	e0 e8       	ldi	r30, 0x80	; 128
  276:	f0 e0       	ldi	r31, 0x00	; 0
  278:	80 81       	ld	r24, Z
@@ -422,6 +356,9 @@ void tournerDroite_toggle(uint16_t vitesse){
  27e:	08 95       	ret
 
 00000280 <PWM_stop>:
+}
+void PWM_stop(){
+	TCCR1A&=0x0F;
  280:	e0 e8       	ldi	r30, 0x80	; 128
  282:	f0 e0       	ldi	r31, 0x00	; 0
  284:	80 81       	ld	r24, Z
@@ -430,79 +367,74 @@ void tournerDroite_toggle(uint16_t vitesse){
  28a:	08 95       	ret
 
 0000028c <PWM_setA>:
+	TCCR1B=0x09; // 00(osef) - 01(mode10bits) 001(prescal) => ici 0000 1001
+	//tester 00 00 (mode) !
+	
+}
+
+void PWM_setA(uint16_t OCR){
  28c:	cf 93       	push	r28
  28e:	df 93       	push	r29
  290:	ec 01       	movw	r28, r24
+	if(OCR==0) PWM_stop(); //etrangement, il reste un petit "sursaut" de PWM à 0
  292:	89 2b       	or	r24, r25
  294:	19 f4       	brne	.+6      	; 0x29c <PWM_setA+0x10>
  296:	0e 94 40 01 	call	0x280	; 0x280 <PWM_stop>
  29a:	02 c0       	rjmp	.+4      	; 0x2a0 <PWM_setA+0x14>
+	else PWM_start();
  29c:	0e 94 3a 01 	call	0x274	; 0x274 <PWM_start>
- 2a0:	d0 93 89 00 	sts	0x0089, r29	; 0x800089 <__DATA_REGION_ORIGIN__+0x29>
- 2a4:	c0 93 88 00 	sts	0x0088, r28	; 0x800088 <__DATA_REGION_ORIGIN__+0x28>
+	OCR1AH=(uint8_t)(OCR>>8);
+ 2a0:	d0 93 89 00 	sts	0x0089, r29	; 0x800089 <__TEXT_REGION_LENGTH__+0x7e0089>
+	OCR1AL=(uint8_t)OCR;
+ 2a4:	c0 93 88 00 	sts	0x0088, r28	; 0x800088 <__TEXT_REGION_LENGTH__+0x7e0088>
+}
  2a8:	df 91       	pop	r29
  2aa:	cf 91       	pop	r28
  2ac:	08 95       	ret
 
 000002ae <PWM_setB>:
+
+void PWM_setB(uint16_t OCR){
  2ae:	cf 93       	push	r28
  2b0:	df 93       	push	r29
  2b2:	ec 01       	movw	r28, r24
+	if(OCR==0) PWM_stop(); //etrangement, il reste un petit "sursaut" de PWM à 0
  2b4:	89 2b       	or	r24, r25
  2b6:	19 f4       	brne	.+6      	; 0x2be <PWM_setB+0x10>
  2b8:	0e 94 40 01 	call	0x280	; 0x280 <PWM_stop>
  2bc:	02 c0       	rjmp	.+4      	; 0x2c2 <PWM_setB+0x14>
+	else PWM_start();
  2be:	0e 94 3a 01 	call	0x274	; 0x274 <PWM_start>
- 2c2:	d0 93 8b 00 	sts	0x008B, r29	; 0x80008b <__DATA_REGION_ORIGIN__+0x2b>
- 2c6:	c0 93 8a 00 	sts	0x008A, r28	; 0x80008a <__DATA_REGION_ORIGIN__+0x2a>
+	OCR1BH=(uint8_t)(OCR>>8);
+ 2c2:	d0 93 8b 00 	sts	0x008B, r29	; 0x80008b <__TEXT_REGION_LENGTH__+0x7e008b>
+	OCR1BL=(uint8_t)OCR;
+ 2c6:	c0 93 8a 00 	sts	0x008A, r28	; 0x80008a <__TEXT_REGION_LENGTH__+0x7e008a>
+}
  2ca:	df 91       	pop	r29
  2cc:	cf 91       	pop	r28
  2ce:	08 95       	ret
 
 000002d0 <SPI_init>:
-void SPI_init(){
-	// MOSI et SCK en output le reste en input
-	//MOSI:	PB3
-	//SCK:	PB5
-	//MISO:	PB4
-	DDRB |= (1<<3)|(1<<5); //SCK MOSI output
  2d0:	84 b1       	in	r24, 0x04	; 4
  2d2:	88 62       	ori	r24, 0x28	; 40
  2d4:	84 b9       	out	0x04, r24	; 4
-	DDRB &= ~(1<<4); //MISO input
  2d6:	24 98       	cbi	0x04, 4	; 4
-
-	//activation du SPI en master avec prescaler de /64
-	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR1);
  2d8:	82 e5       	ldi	r24, 0x52	; 82
  2da:	8c bd       	out	0x2c, r24	; 44
  2dc:	08 95       	ret
 
 000002de <SPI_MasterEnvoie>:
-}
-
-
-void SPI_MasterEnvoie(unsigned char data){
-	SPDR = data; //ecriture de data dans buffer d'envoie
  2de:	8e bd       	out	0x2e, r24	; 46
-	while(!(SPSR & (1<<SPIF))); // attendre que la transmission se termine
  2e0:	0d b4       	in	r0, 0x2d	; 45
  2e2:	07 fe       	sbrs	r0, 7
  2e4:	fd cf       	rjmp	.-6      	; 0x2e0 <SPI_MasterEnvoie+0x2>
-}
  2e6:	08 95       	ret
 
 000002e8 <SPI_MasterEnvoieReception>:
-
-uint8_t SPI_MasterEnvoieReception(unsigned char data){
-	SPDR = data;
  2e8:	8e bd       	out	0x2e, r24	; 46
-	while(!(SPSR & (1 << SPIF)));
  2ea:	0d b4       	in	r0, 0x2d	; 45
  2ec:	07 fe       	sbrs	r0, 7
  2ee:	fd cf       	rjmp	.-6      	; 0x2ea <SPI_MasterEnvoieReception+0x2>
-
-	return SPDR;
  2f0:	8e b5       	in	r24, 0x2e	; 46
  2f2:	08 95       	ret
 
@@ -513,58 +445,34 @@ uint8_t SPI_MasterEnvoieReception(unsigned char data){
  2fa:	16 bc       	out	0x26, r1	; 38
  2fc:	87 bd       	out	0x27, r24	; 39
  2fe:	82 e0       	ldi	r24, 0x02	; 2
- 300:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <__DATA_REGION_ORIGIN__+0xe>
+ 300:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <__TEXT_REGION_LENGTH__+0x7e006e>
  304:	08 95       	ret
 
 00000306 <USART0_init>:
-ubrr donne le baud de la communication, se referrer au tableau excel pour plus d'informations sur son calcul
-*/
-void USART0_init(uint16_t ubrr){
-	//voir tableau excel pour calcul BAUD
-	//se referer au datasheet
-	UBRR0H = (uint8_t)(ubrr>>8); //def baud 1/2
- 306:	90 93 c5 00 	sts	0x00C5, r25	; 0x8000c5 <__DATA_REGION_ORIGIN__+0x65>
-	UBRR0L = (uint8_t)ubrr; //def baud 2/2
- 30a:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__DATA_REGION_ORIGIN__+0x64>
-	UCSR0B = 0x98;//1 0 0 1 1 0? 0? 0?
+ 306:	90 93 c5 00 	sts	0x00C5, r25	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7e00c5>
+ 30a:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7e00c4>
  30e:	88 e9       	ldi	r24, 0x98	; 152
- 310:	80 93 c1 00 	sts	0x00C1, r24	; 0x8000c1 <__DATA_REGION_ORIGIN__+0x61>
-	UCSR0C = 0x06;//00 00 0 1 1 0
+ 310:	80 93 c1 00 	sts	0x00C1, r24	; 0x8000c1 <__TEXT_REGION_LENGTH__+0x7e00c1>
  314:	86 e0       	ldi	r24, 0x06	; 6
- 316:	80 93 c2 00 	sts	0x00C2, r24	; 0x8000c2 <__DATA_REGION_ORIGIN__+0x62>
+ 316:	80 93 c2 00 	sts	0x00C2, r24	; 0x8000c2 <__TEXT_REGION_LENGTH__+0x7e00c2>
  31a:	08 95       	ret
 
 0000031c <USART0_sendByte>:
-Envoie un octet (byte) de donnée
-param: data
-data est la donnée à envoyer 
-*/
-void USART0_sendByte(unsigned char data){
-	while (!( UCSR0A & (1<<UDRE0))); //attendre que le buffer se libere
  31c:	e0 ec       	ldi	r30, 0xC0	; 192
  31e:	f0 e0       	ldi	r31, 0x00	; 0
  320:	90 81       	ld	r25, Z
  322:	95 ff       	sbrs	r25, 5
  324:	fd cf       	rjmp	.-6      	; 0x320 <USART0_sendByte+0x4>
-	UDR0=data; //envoie de data en l'inscivant dans le buffer d'envoi
- 326:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__DATA_REGION_ORIGIN__+0x66>
+ 326:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7e00c6>
  32a:	08 95       	ret
 
 0000032c <USART0_sendString>:
-Envoie un string et CR+LF (saut de ligne)
-param: data
-String à envoyer
-(utilise USART0_senByte(...))
-*/
-void USART0_sendString(char* data){
  32c:	ff 92       	push	r15
  32e:	0f 93       	push	r16
  330:	1f 93       	push	r17
  332:	cf 93       	push	r28
  334:	df 93       	push	r29
  336:	8c 01       	movw	r16, r24
-	uint8_t i=0;
-	while ((i<255) & (data[i]!=0)) // tant que le string n'est pas finie (limite à 255 pour pas faire le fou)
  338:	fc 01       	movw	r30, r24
  33a:	80 81       	ld	r24, Z
  33c:	88 23       	and	r24, r24
@@ -572,17 +480,8 @@ void USART0_sendString(char* data){
  340:	c0 e0       	ldi	r28, 0x00	; 0
  342:	d1 e0       	ldi	r29, 0x01	; 1
  344:	f1 2c       	mov	r15, r1
-	{
-		USART0_sendByte(data[i]); //envoie via fonction USART0_sendByte
  346:	0e 94 8e 01 	call	0x31c	; 0x31c <USART0_sendByte>
-		i++;
  34a:	cf 5f       	subi	r28, 0xFF	; 255
-String à envoyer
-(utilise USART0_senByte(...))
-*/
-void USART0_sendString(char* data){
-	uint8_t i=0;
-	while ((i<255) & (data[i]!=0)) // tant que le string n'est pas finie (limite à 255 pour pas faire le fou)
  34c:	f8 01       	movw	r30, r16
  34e:	ec 0f       	add	r30, r28
  350:	f1 1d       	adc	r31, r1
@@ -599,17 +498,10 @@ void USART0_sendString(char* data){
  366:	9f 2d       	mov	r25, r15
  368:	91 11       	cpse	r25, r1
  36a:	ed cf       	rjmp	.-38     	; 0x346 <USART0_sendString+0x1a>
-	{
-		USART0_sendByte(data[i]); //envoie via fonction USART0_sendByte
-		i++;
-	}
-	USART0_sendByte(13); //CR
  36c:	8d e0       	ldi	r24, 0x0D	; 13
  36e:	0e 94 8e 01 	call	0x31c	; 0x31c <USART0_sendByte>
-	USART0_sendByte(10); //LF
  372:	8a e0       	ldi	r24, 0x0A	; 10
  374:	0e 94 8e 01 	call	0x31c	; 0x31c <USART0_sendByte>
-}
  378:	df 91       	pop	r29
  37a:	cf 91       	pop	r28
  37c:	1f 91       	pop	r17
@@ -618,7 +510,7 @@ void USART0_sendString(char* data){
  382:	08 95       	ret
 
 00000384 <__vector_14>:
-volatile uint16_t vitesse=800;
+volatile uint8_t override_obst=0;
 
 
 
@@ -639,360 +531,432 @@ ISR (TIMER0_COMPA_vect){
  39c:	9f 93       	push	r25
  39e:	af 93       	push	r26
  3a0:	bf 93       	push	r27
- 3a2:	ef 93       	push	r30
- 3a4:	ff 93       	push	r31
+ 3a2:	cf 93       	push	r28
+ 3a4:	df 93       	push	r29
+ 3a6:	ef 93       	push	r30
+ 3a8:	ff 93       	push	r31
 	if(++var_clk>=80){//execution toutes les secondes
- 3a6:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <var_clk>
- 3aa:	90 91 04 01 	lds	r25, 0x0104	; 0x800104 <var_clk+0x1>
- 3ae:	01 96       	adiw	r24, 0x01	; 1
- 3b0:	90 93 04 01 	sts	0x0104, r25	; 0x800104 <var_clk+0x1>
- 3b4:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <var_clk>
- 3b8:	80 35       	cpi	r24, 0x50	; 80
- 3ba:	91 05       	cpc	r25, r1
- 3bc:	b8 f0       	brcs	.+46     	; 0x3ec <__vector_14+0x68>
+ 3aa:	80 91 d6 01 	lds	r24, 0x01D6	; 0x8001d6 <var_clk>
+ 3ae:	8f 5f       	subi	r24, 0xFF	; 255
+ 3b0:	80 93 d6 01 	sts	0x01D6, r24	; 0x8001d6 <var_clk>
+ 3b4:	80 35       	cpi	r24, 0x50	; 80
+ 3b6:	a8 f0       	brcs	.+42     	; 0x3e2 <__vector_14+0x5e>
 		
 		if(heartbeat==1){ //heartbeat, pour savoir si toutes les composantes du systemes sont OP
- 3be:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <heartbeat>
- 3c2:	81 30       	cpi	r24, 0x01	; 1
- 3c4:	99 f4       	brne	.+38     	; 0x3ec <__vector_14+0x68>
+ 3b8:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <heartbeat>
+ 3bc:	81 30       	cpi	r24, 0x01	; 1
+ 3be:	89 f4       	brne	.+34     	; 0x3e2 <__vector_14+0x5e>
 			PORTC^=DEBUG_LED; //clignotement de la LED de debug
- 3c6:	98 b1       	in	r25, 0x08	; 8
- 3c8:	80 e2       	ldi	r24, 0x20	; 32
- 3ca:	89 27       	eor	r24, r25
- 3cc:	88 b9       	out	0x08, r24	; 8
+ 3c0:	98 b1       	in	r25, 0x08	; 8
+ 3c2:	80 e2       	ldi	r24, 0x20	; 32
+ 3c4:	89 27       	eor	r24, r25
+ 3c6:	88 b9       	out	0x08, r24	; 8
 			USART0_sendByte('*'); //envoie d'un heartbeat à l'UART
- 3ce:	8a e2       	ldi	r24, 0x2A	; 42
- 3d0:	0e 94 8e 01 	call	0x31c	; 0x31c <USART0_sendByte>
+ 3c8:	8a e2       	ldi	r24, 0x2A	; 42
+ 3ca:	0e 94 8e 01 	call	0x31c	; 0x31c <USART0_sendByte>
 			
 			//Heartbeat du salve SPI
 			if(SPI_MasterEnvoieReception(0x01)==0x05){ //envoie de 0x01 (0x02 ACK)
- 3d4:	81 e0       	ldi	r24, 0x01	; 1
- 3d6:	0e 94 74 01 	call	0x2e8	; 0x2e8 <SPI_MasterEnvoieReception>
- 3da:	85 30       	cpi	r24, 0x05	; 5
- 3dc:	19 f4       	brne	.+6      	; 0x3e4 <__vector_14+0x60>
+ 3ce:	81 e0       	ldi	r24, 0x01	; 1
+ 3d0:	0e 94 74 01 	call	0x2e8	; 0x2e8 <SPI_MasterEnvoieReception>
+ 3d4:	85 30       	cpi	r24, 0x05	; 5
+ 3d6:	19 f4       	brne	.+6      	; 0x3de <__vector_14+0x5a>
 				USART0_sendByte('^'); //envoie de '^' pour heartbeat de salve SPI
- 3de:	8e e5       	ldi	r24, 0x5E	; 94
- 3e0:	0e 94 8e 01 	call	0x31c	; 0x31c <USART0_sendByte>
+ 3d8:	8e e5       	ldi	r24, 0x5E	; 94
+ 3da:	0e 94 8e 01 	call	0x31c	; 0x31c <USART0_sendByte>
 			}
 			
 			var_clk=0;
- 3e4:	10 92 04 01 	sts	0x0104, r1	; 0x800104 <var_clk+0x1>
- 3e8:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <var_clk>
+ 3de:	10 92 d6 01 	sts	0x01D6, r1	; 0x8001d6 <var_clk>
 		}
 		
 	}
-}
- 3ec:	ff 91       	pop	r31
- 3ee:	ef 91       	pop	r30
- 3f0:	bf 91       	pop	r27
- 3f2:	af 91       	pop	r26
- 3f4:	9f 91       	pop	r25
- 3f6:	8f 91       	pop	r24
- 3f8:	7f 91       	pop	r23
- 3fa:	6f 91       	pop	r22
- 3fc:	5f 91       	pop	r21
- 3fe:	4f 91       	pop	r20
- 400:	3f 91       	pop	r19
- 402:	2f 91       	pop	r18
- 404:	0f 90       	pop	r0
- 406:	0f be       	out	0x3f, r0	; 63
- 408:	0f 90       	pop	r0
- 40a:	1f 90       	pop	r1
- 40c:	18 95       	reti
+	if(++var_t_acq_IR>=8){ //toutes les 0,1sec
+ 3e2:	80 91 d5 01 	lds	r24, 0x01D5	; 0x8001d5 <var_t_acq_IR>
+ 3e6:	8f 5f       	subi	r24, 0xFF	; 255
+ 3e8:	80 93 d5 01 	sts	0x01D5, r24	; 0x8001d5 <var_t_acq_IR>
+ 3ec:	88 30       	cpi	r24, 0x08	; 8
+ 3ee:	30 f1       	brcs	.+76     	; 0x43c <__LOCK_REGION_LENGTH__+0x3c>
+		//rapport d'état slave SPI
+		if(SPI_MasterEnvoieReception(0x09)==0X02){ //si obstacle/erreur => voir tableau excel
+ 3f0:	89 e0       	ldi	r24, 0x09	; 9
+ 3f2:	0e 94 74 01 	call	0x2e8	; 0x2e8 <SPI_MasterEnvoieReception>
+ 3f6:	82 30       	cpi	r24, 0x02	; 2
+ 3f8:	f9 f4       	brne	.+62     	; 0x438 <__LOCK_REGION_LENGTH__+0x38>
+			//get position capteur IR
+			uint8_t angle =SPI_MasterEnvoieReception(0x0E); //voir tableau excel
+ 3fa:	8e e0       	ldi	r24, 0x0E	; 14
+ 3fc:	0e 94 74 01 	call	0x2e8	; 0x2e8 <SPI_MasterEnvoieReception>
+ 400:	d8 2f       	mov	r29, r24
+			uint8_t mesure =SPI_MasterEnvoieReception(0x04); //voir tableau excel
+ 402:	84 e0       	ldi	r24, 0x04	; 4
+ 404:	0e 94 74 01 	call	0x2e8	; 0x2e8 <SPI_MasterEnvoieReception>
+ 408:	c8 2f       	mov	r28, r24
+			USART0_sendString("Obstacle position: {");
+ 40a:	83 e0       	ldi	r24, 0x03	; 3
+ 40c:	91 e0       	ldi	r25, 0x01	; 1
+ 40e:	0e 94 96 01 	call	0x32c	; 0x32c <USART0_sendString>
+			USART0_sendByte(angle);
+ 412:	8d 2f       	mov	r24, r29
+ 414:	0e 94 8e 01 	call	0x31c	; 0x31c <USART0_sendByte>
+			USART0_sendByte(',');
+ 418:	8c e2       	ldi	r24, 0x2C	; 44
+ 41a:	0e 94 8e 01 	call	0x31c	; 0x31c <USART0_sendByte>
+			USART0_sendByte(mesure);
+ 41e:	8c 2f       	mov	r24, r28
+ 420:	0e 94 8e 01 	call	0x31c	; 0x31c <USART0_sendByte>
+			USART0_sendString("}");
+ 424:	88 e1       	ldi	r24, 0x18	; 24
+ 426:	91 e0       	ldi	r25, 0x01	; 1
+ 428:	0e 94 96 01 	call	0x32c	; 0x32c <USART0_sendString>
+			if(!override_obst){
+ 42c:	80 91 d4 01 	lds	r24, 0x01D4	; 0x8001d4 <override_obst>
+ 430:	81 11       	cpse	r24, r1
+ 432:	02 c0       	rjmp	.+4      	; 0x438 <__LOCK_REGION_LENGTH__+0x38>
+				stop();
+ 434:	0e 94 aa 00 	call	0x154	; 0x154 <stop>
+			}
+		}
+		var_t_acq_IR=0;
+ 438:	10 92 d5 01 	sts	0x01D5, r1	; 0x8001d5 <var_t_acq_IR>
 
-0000040e <__vector_18>:
+	}
+}
+ 43c:	ff 91       	pop	r31
+ 43e:	ef 91       	pop	r30
+ 440:	df 91       	pop	r29
+ 442:	cf 91       	pop	r28
+ 444:	bf 91       	pop	r27
+ 446:	af 91       	pop	r26
+ 448:	9f 91       	pop	r25
+ 44a:	8f 91       	pop	r24
+ 44c:	7f 91       	pop	r23
+ 44e:	6f 91       	pop	r22
+ 450:	5f 91       	pop	r21
+ 452:	4f 91       	pop	r20
+ 454:	3f 91       	pop	r19
+ 456:	2f 91       	pop	r18
+ 458:	0f 90       	pop	r0
+ 45a:	0f be       	out	0x3f, r0	; 63
+ 45c:	0f 90       	pop	r0
+ 45e:	1f 90       	pop	r1
+ 460:	18 95       	reti
+
+00000462 <__vector_18>:
 
 
 /*
 Interruption reception UART
 */
 ISR(USART_RX_vect){
- 40e:	1f 92       	push	r1
- 410:	0f 92       	push	r0
- 412:	0f b6       	in	r0, 0x3f	; 63
- 414:	0f 92       	push	r0
- 416:	11 24       	eor	r1, r1
- 418:	2f 93       	push	r18
- 41a:	3f 93       	push	r19
- 41c:	4f 93       	push	r20
- 41e:	5f 93       	push	r21
- 420:	6f 93       	push	r22
- 422:	7f 93       	push	r23
- 424:	8f 93       	push	r24
- 426:	9f 93       	push	r25
- 428:	af 93       	push	r26
- 42a:	bf 93       	push	r27
- 42c:	cf 93       	push	r28
- 42e:	ef 93       	push	r30
- 430:	ff 93       	push	r31
+ 462:	1f 92       	push	r1
+ 464:	0f 92       	push	r0
+ 466:	0f b6       	in	r0, 0x3f	; 63
+ 468:	0f 92       	push	r0
+ 46a:	11 24       	eor	r1, r1
+ 46c:	2f 93       	push	r18
+ 46e:	3f 93       	push	r19
+ 470:	4f 93       	push	r20
+ 472:	5f 93       	push	r21
+ 474:	6f 93       	push	r22
+ 476:	7f 93       	push	r23
+ 478:	8f 93       	push	r24
+ 47a:	9f 93       	push	r25
+ 47c:	af 93       	push	r26
+ 47e:	bf 93       	push	r27
+ 480:	cf 93       	push	r28
+ 482:	ef 93       	push	r30
+ 484:	ff 93       	push	r31
 	
 	//petit truc con: UDR0 sert de buffer reception ET envoie
 	unsigned char ByteLu=UDR0; //enregistrement de la valeur lu
- 432:	c0 91 c6 00 	lds	r28, 0x00C6	; 0x8000c6 <__DATA_REGION_ORIGIN__+0x66>
+ 486:	c0 91 c6 00 	lds	r28, 0x00C6	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7e00c6>
 	//analyseur syntaxique
 	/*Commandes:
 		voir tableau excel pour la liste des commandes
 
 	*/
 	switch (ByteLu)
- 436:	8c 2f       	mov	r24, r28
- 438:	90 e0       	ldi	r25, 0x00	; 0
- 43a:	fc 01       	movw	r30, r24
- 43c:	bb 97       	sbiw	r30, 0x2b	; 43
- 43e:	e0 35       	cpi	r30, 0x50	; 80
- 440:	f1 05       	cpc	r31, r1
- 442:	08 f0       	brcs	.+2      	; 0x446 <__vector_18+0x38>
- 444:	96 c0       	rjmp	.+300    	; 0x572 <__vector_18+0x164>
- 446:	ec 5c       	subi	r30, 0xCC	; 204
- 448:	ff 4f       	sbci	r31, 0xFF	; 255
- 44a:	0c 94 ed 02 	jmp	0x5da	; 0x5da <__tablejump2__>
+ 48a:	8c 2f       	mov	r24, r28
+ 48c:	90 e0       	ldi	r25, 0x00	; 0
+ 48e:	fc 01       	movw	r30, r24
+ 490:	bb 97       	sbiw	r30, 0x2b	; 43
+ 492:	e0 35       	cpi	r30, 0x50	; 80
+ 494:	f1 05       	cpc	r31, r1
+ 496:	08 f0       	brcs	.+2      	; 0x49a <__vector_18+0x38>
+ 498:	aa c0       	rjmp	.+340    	; 0x5ee <__vector_18+0x18c>
+ 49a:	ec 5c       	subi	r30, 0xCC	; 204
+ 49c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 49e:	0c 94 2b 03 	jmp	0x656	; 0x656 <__tablejump2__>
 	{
 
 		case 'a': //commutation heartbeat
 		if(heartbeat==1){
- 44e:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <heartbeat>
- 452:	81 30       	cpi	r24, 0x01	; 1
- 454:	41 f4       	brne	.+16     	; 0x466 <__vector_18+0x58>
+ 4a2:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <heartbeat>
+ 4a6:	81 30       	cpi	r24, 0x01	; 1
+ 4a8:	41 f4       	brne	.+16     	; 0x4ba <__vector_18+0x58>
 			USART0_sendString("Arret heartbeat");
- 456:	85 e0       	ldi	r24, 0x05	; 5
- 458:	91 e0       	ldi	r25, 0x01	; 1
- 45a:	0e 94 96 01 	call	0x32c	; 0x32c <USART0_sendString>
+ 4aa:	8a e1       	ldi	r24, 0x1A	; 26
+ 4ac:	91 e0       	ldi	r25, 0x01	; 1
+ 4ae:	0e 94 96 01 	call	0x32c	; 0x32c <USART0_sendString>
 			heartbeat=0;
- 45e:	10 92 02 01 	sts	0x0102, r1	; 0x800102 <heartbeat>
+ 4b2:	10 92 02 01 	sts	0x0102, r1	; 0x800102 <heartbeat>
 			PORTC &= ~DEBUG_LED;
- 462:	45 98       	cbi	0x08, 5	; 8
- 464:	90 c0       	rjmp	.+288    	; 0x586 <__vector_18+0x178>
+ 4b6:	45 98       	cbi	0x08, 5	; 8
+ 4b8:	a4 c0       	rjmp	.+328    	; 0x602 <__vector_18+0x1a0>
 			}else{
 			USART0_sendString("Lancement heartbeat");
- 466:	85 e1       	ldi	r24, 0x15	; 21
- 468:	91 e0       	ldi	r25, 0x01	; 1
- 46a:	0e 94 96 01 	call	0x32c	; 0x32c <USART0_sendString>
+ 4ba:	8a e2       	ldi	r24, 0x2A	; 42
+ 4bc:	91 e0       	ldi	r25, 0x01	; 1
+ 4be:	0e 94 96 01 	call	0x32c	; 0x32c <USART0_sendString>
 			heartbeat=1;
- 46e:	81 e0       	ldi	r24, 0x01	; 1
- 470:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <heartbeat>
- 474:	88 c0       	rjmp	.+272    	; 0x586 <__vector_18+0x178>
+ 4c2:	81 e0       	ldi	r24, 0x01	; 1
+ 4c4:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <heartbeat>
+ 4c8:	9c c0       	rjmp	.+312    	; 0x602 <__vector_18+0x1a0>
 		break;
 		
 
 		case 'e':
 		//diagnostique
 		USART0_sendString("Debut diagnostique");
- 476:	89 e2       	ldi	r24, 0x29	; 41
- 478:	91 e0       	ldi	r25, 0x01	; 1
- 47a:	0e 94 96 01 	call	0x32c	; 0x32c <USART0_sendString>
+ 4ca:	8e e3       	ldi	r24, 0x3E	; 62
+ 4cc:	91 e0       	ldi	r25, 0x01	; 1
+ 4ce:	0e 94 96 01 	call	0x32c	; 0x32c <USART0_sendString>
 
 		//Capteur IR
 
 		//niveau batterie
 		
 		break;
- 47e:	83 c0       	rjmp	.+262    	; 0x586 <__vector_18+0x178>
+ 4d2:	97 c0       	rjmp	.+302    	; 0x602 <__vector_18+0x1a0>
 
 		case 'z': //avance
 		avancer_toggle(vitesse);
- 480:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
- 484:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 488:	0e 94 b9 00 	call	0x172	; 0x172 <avancer_toggle>
+ 4d4:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 4d8:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 4dc:	0e 94 b9 00 	call	0x172	; 0x172 <avancer_toggle>
 		break;
- 48c:	7c c0       	rjmp	.+248    	; 0x586 <__vector_18+0x178>
+ 4e0:	90 c0       	rjmp	.+288    	; 0x602 <__vector_18+0x1a0>
 
 		case 'q': //gauche
 		tournerGauche_toggle(vitesse);
- 48e:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
- 492:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 496:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <tournerGauche_toggle>
+ 4e2:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 4e6:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 4ea:	0e 94 e9 00 	call	0x1d2	; 0x1d2 <tournerGauche_toggle>
 		break;
- 49a:	75 c0       	rjmp	.+234    	; 0x586 <__vector_18+0x178>
+ 4ee:	89 c0       	rjmp	.+274    	; 0x602 <__vector_18+0x1a0>
 
 		case 'd': //droite
 		tournerDroite_toggle(vitesse);
- 49c:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
- 4a0:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 4a4:	0e 94 01 01 	call	0x202	; 0x202 <tournerDroite_toggle>
+ 4f0:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 4f4:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 4f8:	0e 94 01 01 	call	0x202	; 0x202 <tournerDroite_toggle>
 		break;
- 4a8:	6e c0       	rjmp	.+220    	; 0x586 <__vector_18+0x178>
+ 4fc:	82 c0       	rjmp	.+260    	; 0x602 <__vector_18+0x1a0>
 
 		case 's': //recule
 		reculer_toggle(vitesse);
- 4aa:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
- 4ae:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 4b2:	0e 94 d1 00 	call	0x1a2	; 0x1a2 <reculer_toggle>
+ 4fe:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 502:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 506:	0e 94 d1 00 	call	0x1a2	; 0x1a2 <reculer_toggle>
 		break;
- 4b6:	67 c0       	rjmp	.+206    	; 0x586 <__vector_18+0x178>
+ 50a:	7b c0       	rjmp	.+246    	; 0x602 <__vector_18+0x1a0>
 		
 		case '+':
 		if(vitesse<1023) vitesse++; //pourquoi 1023 ? 3FF(10bits) voir init PWM
- 4b8:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
- 4bc:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 4c0:	8f 3f       	cpi	r24, 0xFF	; 255
- 4c2:	93 40       	sbci	r25, 0x03	; 3
- 4c4:	48 f4       	brcc	.+18     	; 0x4d8 <__vector_18+0xca>
- 4c6:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
- 4ca:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 4ce:	01 96       	adiw	r24, 0x01	; 1
- 4d0:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__data_start+0x1>
- 4d4:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__data_start>
+ 50c:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 510:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 514:	8f 3f       	cpi	r24, 0xFF	; 255
+ 516:	93 40       	sbci	r25, 0x03	; 3
+ 518:	48 f4       	brcc	.+18     	; 0x52c <__vector_18+0xca>
+ 51a:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 51e:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 522:	01 96       	adiw	r24, 0x01	; 1
+ 524:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__data_start+0x1>
+ 528:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__data_start>
 		if(PWM_getA()>0) PWM_setA(vitesse);
- 4d8:	0e 94 26 01 	call	0x24c	; 0x24c <PWM_getA>
- 4dc:	89 2b       	or	r24, r25
- 4de:	31 f0       	breq	.+12     	; 0x4ec <__vector_18+0xde>
- 4e0:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
- 4e4:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 4e8:	0e 94 46 01 	call	0x28c	; 0x28c <PWM_setA>
+ 52c:	0e 94 26 01 	call	0x24c	; 0x24c <PWM_getA>
+ 530:	89 2b       	or	r24, r25
+ 532:	31 f0       	breq	.+12     	; 0x540 <__vector_18+0xde>
+ 534:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 538:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 53c:	0e 94 46 01 	call	0x28c	; 0x28c <PWM_setA>
 		if(PWM_getB()>0) PWM_setB(vitesse);
- 4ec:	0e 94 30 01 	call	0x260	; 0x260 <PWM_getB>
- 4f0:	89 2b       	or	r24, r25
- 4f2:	09 f4       	brne	.+2      	; 0x4f6 <__vector_18+0xe8>
- 4f4:	48 c0       	rjmp	.+144    	; 0x586 <__vector_18+0x178>
- 4f6:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
- 4fa:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 4fe:	0e 94 57 01 	call	0x2ae	; 0x2ae <PWM_setB>
- 502:	41 c0       	rjmp	.+130    	; 0x586 <__vector_18+0x178>
+ 540:	0e 94 30 01 	call	0x260	; 0x260 <PWM_getB>
+ 544:	89 2b       	or	r24, r25
+ 546:	09 f4       	brne	.+2      	; 0x54a <__vector_18+0xe8>
+ 548:	5c c0       	rjmp	.+184    	; 0x602 <__vector_18+0x1a0>
+ 54a:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 54e:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 552:	0e 94 57 01 	call	0x2ae	; 0x2ae <PWM_setB>
+ 556:	55 c0       	rjmp	.+170    	; 0x602 <__vector_18+0x1a0>
 		break;
 		
 		case '-':
 		if(vitesse>150) vitesse--;
- 504:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
- 508:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 50c:	87 39       	cpi	r24, 0x97	; 151
- 50e:	91 05       	cpc	r25, r1
- 510:	48 f0       	brcs	.+18     	; 0x524 <__vector_18+0x116>
- 512:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
- 516:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 51a:	01 97       	sbiw	r24, 0x01	; 1
- 51c:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__data_start+0x1>
- 520:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__data_start>
+ 558:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 55c:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 560:	87 39       	cpi	r24, 0x97	; 151
+ 562:	91 05       	cpc	r25, r1
+ 564:	48 f0       	brcs	.+18     	; 0x578 <__vector_18+0x116>
+ 566:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 56a:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 56e:	01 97       	sbiw	r24, 0x01	; 1
+ 570:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <__data_start+0x1>
+ 574:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__data_start>
 		if(PWM_getA()>0) PWM_setA(vitesse);
- 524:	0e 94 26 01 	call	0x24c	; 0x24c <PWM_getA>
- 528:	89 2b       	or	r24, r25
- 52a:	31 f0       	breq	.+12     	; 0x538 <__vector_18+0x12a>
- 52c:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
- 530:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 534:	0e 94 46 01 	call	0x28c	; 0x28c <PWM_setA>
+ 578:	0e 94 26 01 	call	0x24c	; 0x24c <PWM_getA>
+ 57c:	89 2b       	or	r24, r25
+ 57e:	31 f0       	breq	.+12     	; 0x58c <__vector_18+0x12a>
+ 580:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 584:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 588:	0e 94 46 01 	call	0x28c	; 0x28c <PWM_setA>
 		if(PWM_getB()>0) PWM_setB(vitesse);
- 538:	0e 94 30 01 	call	0x260	; 0x260 <PWM_getB>
- 53c:	89 2b       	or	r24, r25
- 53e:	19 f1       	breq	.+70     	; 0x586 <__vector_18+0x178>
- 540:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
- 544:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
- 548:	0e 94 57 01 	call	0x2ae	; 0x2ae <PWM_setB>
- 54c:	1c c0       	rjmp	.+56     	; 0x586 <__vector_18+0x178>
+ 58c:	0e 94 30 01 	call	0x260	; 0x260 <PWM_getB>
+ 590:	89 2b       	or	r24, r25
+ 592:	b9 f1       	breq	.+110    	; 0x602 <__vector_18+0x1a0>
+ 594:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 598:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__data_start+0x1>
+ 59c:	0e 94 57 01 	call	0x2ae	; 0x2ae <PWM_setB>
+ 5a0:	30 c0       	rjmp	.+96     	; 0x602 <__vector_18+0x1a0>
 		break;
 		
 		
 		//commande envoie SPI slave
 		case 'p':
 		SPI_MasterEnvoie(0xB); //arret balayage
- 54e:	8b e0       	ldi	r24, 0x0B	; 11
- 550:	0e 94 6f 01 	call	0x2de	; 0x2de <SPI_MasterEnvoie>
+ 5a2:	8b e0       	ldi	r24, 0x0B	; 11
+ 5a4:	0e 94 6f 01 	call	0x2de	; 0x2de <SPI_MasterEnvoie>
 		SPI_MasterEnvoie(0xC);
- 554:	8c e0       	ldi	r24, 0x0C	; 12
- 556:	0e 94 6f 01 	call	0x2de	; 0x2de <SPI_MasterEnvoie>
+ 5a8:	8c e0       	ldi	r24, 0x0C	; 12
+ 5aa:	0e 94 6f 01 	call	0x2de	; 0x2de <SPI_MasterEnvoie>
 		break;
- 55a:	15 c0       	rjmp	.+42     	; 0x586 <__vector_18+0x178>
+ 5ae:	29 c0       	rjmp	.+82     	; 0x602 <__vector_18+0x1a0>
 		
 		case 'm':
 		SPI_MasterEnvoie(0xB); //arret balayage
- 55c:	8b e0       	ldi	r24, 0x0B	; 11
- 55e:	0e 94 6f 01 	call	0x2de	; 0x2de <SPI_MasterEnvoie>
+ 5b0:	8b e0       	ldi	r24, 0x0B	; 11
+ 5b2:	0e 94 6f 01 	call	0x2de	; 0x2de <SPI_MasterEnvoie>
 		SPI_MasterEnvoie(0xD);
- 562:	8d e0       	ldi	r24, 0x0D	; 13
- 564:	0e 94 6f 01 	call	0x2de	; 0x2de <SPI_MasterEnvoie>
+ 5b6:	8d e0       	ldi	r24, 0x0D	; 13
+ 5b8:	0e 94 6f 01 	call	0x2de	; 0x2de <SPI_MasterEnvoie>
 		break;
- 568:	0e c0       	rjmp	.+28     	; 0x586 <__vector_18+0x178>
+ 5bc:	22 c0       	rjmp	.+68     	; 0x602 <__vector_18+0x1a0>
 		
 		case 'l':
 		SPI_MasterEnvoie(0x6); //toggle balayage
- 56a:	86 e0       	ldi	r24, 0x06	; 6
- 56c:	0e 94 6f 01 	call	0x2de	; 0x2de <SPI_MasterEnvoie>
+ 5be:	86 e0       	ldi	r24, 0x06	; 6
+ 5c0:	0e 94 6f 01 	call	0x2de	; 0x2de <SPI_MasterEnvoie>
 		break;
- 570:	0a c0       	rjmp	.+20     	; 0x586 <__vector_18+0x178>
+ 5c4:	1e c0       	rjmp	.+60     	; 0x602 <__vector_18+0x1a0>
+		
+		case 'o':
+		override_obst=override_obst^1; //toggle override
+ 5c6:	90 91 d4 01 	lds	r25, 0x01D4	; 0x8001d4 <override_obst>
+ 5ca:	81 e0       	ldi	r24, 0x01	; 1
+ 5cc:	89 27       	eor	r24, r25
+ 5ce:	80 93 d4 01 	sts	0x01D4, r24	; 0x8001d4 <override_obst>
+		if(override_obst) USART0_sendString("Les obstacles ne seront plus traite");
+ 5d2:	80 91 d4 01 	lds	r24, 0x01D4	; 0x8001d4 <override_obst>
+ 5d6:	88 23       	and	r24, r24
+ 5d8:	29 f0       	breq	.+10     	; 0x5e4 <__vector_18+0x182>
+ 5da:	81 e5       	ldi	r24, 0x51	; 81
+ 5dc:	91 e0       	ldi	r25, 0x01	; 1
+ 5de:	0e 94 96 01 	call	0x32c	; 0x32c <USART0_sendString>
+ 5e2:	0f c0       	rjmp	.+30     	; 0x602 <__vector_18+0x1a0>
+		else USART0_sendString("Les obstacles seront maintenant traite");
+ 5e4:	85 e7       	ldi	r24, 0x75	; 117
+ 5e6:	91 e0       	ldi	r25, 0x01	; 1
+ 5e8:	0e 94 96 01 	call	0x32c	; 0x32c <USART0_sendString>
+ 5ec:	0a c0       	rjmp	.+20     	; 0x602 <__vector_18+0x1a0>
+		break;
+
 
 		default:
 		USART0_sendByte('>');
- 572:	8e e3       	ldi	r24, 0x3E	; 62
- 574:	0e 94 8e 01 	call	0x31c	; 0x31c <USART0_sendByte>
+ 5ee:	8e e3       	ldi	r24, 0x3E	; 62
+ 5f0:	0e 94 8e 01 	call	0x31c	; 0x31c <USART0_sendByte>
 		USART0_sendByte(ByteLu);
- 578:	8c 2f       	mov	r24, r28
- 57a:	0e 94 8e 01 	call	0x31c	; 0x31c <USART0_sendByte>
+ 5f4:	8c 2f       	mov	r24, r28
+ 5f6:	0e 94 8e 01 	call	0x31c	; 0x31c <USART0_sendByte>
 		USART0_sendString(" => Commande inconnue !");
- 57e:	8c e3       	ldi	r24, 0x3C	; 60
- 580:	91 e0       	ldi	r25, 0x01	; 1
- 582:	0e 94 96 01 	call	0x32c	; 0x32c <USART0_sendString>
+ 5fa:	8c e9       	ldi	r24, 0x9C	; 156
+ 5fc:	91 e0       	ldi	r25, 0x01	; 1
+ 5fe:	0e 94 96 01 	call	0x32c	; 0x32c <USART0_sendString>
 		break;
 
 	}
 }
- 586:	ff 91       	pop	r31
- 588:	ef 91       	pop	r30
- 58a:	cf 91       	pop	r28
- 58c:	bf 91       	pop	r27
- 58e:	af 91       	pop	r26
- 590:	9f 91       	pop	r25
- 592:	8f 91       	pop	r24
- 594:	7f 91       	pop	r23
- 596:	6f 91       	pop	r22
- 598:	5f 91       	pop	r21
- 59a:	4f 91       	pop	r20
- 59c:	3f 91       	pop	r19
- 59e:	2f 91       	pop	r18
- 5a0:	0f 90       	pop	r0
- 5a2:	0f be       	out	0x3f, r0	; 63
- 5a4:	0f 90       	pop	r0
- 5a6:	1f 90       	pop	r1
- 5a8:	18 95       	reti
+ 602:	ff 91       	pop	r31
+ 604:	ef 91       	pop	r30
+ 606:	cf 91       	pop	r28
+ 608:	bf 91       	pop	r27
+ 60a:	af 91       	pop	r26
+ 60c:	9f 91       	pop	r25
+ 60e:	8f 91       	pop	r24
+ 610:	7f 91       	pop	r23
+ 612:	6f 91       	pop	r22
+ 614:	5f 91       	pop	r21
+ 616:	4f 91       	pop	r20
+ 618:	3f 91       	pop	r19
+ 61a:	2f 91       	pop	r18
+ 61c:	0f 90       	pop	r0
+ 61e:	0f be       	out	0x3f, r0	; 63
+ 620:	0f 90       	pop	r0
+ 622:	1f 90       	pop	r1
+ 624:	18 95       	reti
 
-000005aa <main>:
+00000626 <main>:
 
 
 int main(void)
 {
 	//Init port C:
 	DDRC = DEBUG_LED; //definition de la direction des pins du poirt C
- 5aa:	80 e2       	ldi	r24, 0x20	; 32
- 5ac:	87 b9       	out	0x07, r24	; 7
+ 626:	80 e2       	ldi	r24, 0x20	; 32
+ 628:	87 b9       	out	0x07, r24	; 7
 	PORTC = DEBUG_LED; //extinction/allumage des ports C
- 5ae:	88 b9       	out	0x08, r24	; 8
+ 62a:	88 b9       	out	0x08, r24	; 8
 	
 	//init interrupt
 	sei(); //activation interruptions global
- 5b0:	78 94       	sei
+ 62c:	78 94       	sei
 	
 	USART0_init(103); //init UART à 9600 Baud
- 5b2:	87 e6       	ldi	r24, 0x67	; 103
- 5b4:	90 e0       	ldi	r25, 0x00	; 0
- 5b6:	0e 94 83 01 	call	0x306	; 0x306 <USART0_init>
+ 62e:	87 e6       	ldi	r24, 0x67	; 103
+ 630:	90 e0       	ldi	r25, 0x00	; 0
+ 632:	0e 94 83 01 	call	0x306	; 0x306 <USART0_init>
 	USART0_sendString("Demarrage du robot...");
- 5ba:	84 e5       	ldi	r24, 0x54	; 84
- 5bc:	91 e0       	ldi	r25, 0x01	; 1
- 5be:	0e 94 96 01 	call	0x32c	; 0x32c <USART0_sendString>
+ 636:	84 eb       	ldi	r24, 0xB4	; 180
+ 638:	91 e0       	ldi	r25, 0x01	; 1
+ 63a:	0e 94 96 01 	call	0x32c	; 0x32c <USART0_sendString>
 	
 	timer0_init(195); //init du timer
- 5c2:	83 ec       	ldi	r24, 0xC3	; 195
- 5c4:	0e 94 7a 01 	call	0x2f4	; 0x2f4 <timer0_init>
+ 63e:	83 ec       	ldi	r24, 0xC3	; 195
+ 640:	0e 94 7a 01 	call	0x2f4	; 0x2f4 <timer0_init>
 	
 	moteur_init(); //init du PWM et des PINs moteurs
- 5c8:	0e 94 a3 00 	call	0x146	; 0x146 <moteur_init>
+ 644:	0e 94 a3 00 	call	0x146	; 0x146 <moteur_init>
 	
 	SPI_init(); //init de la com SPI
- 5cc:	0e 94 68 01 	call	0x2d0	; 0x2d0 <SPI_init>
+ 648:	0e 94 68 01 	call	0x2d0	; 0x2d0 <SPI_init>
 	
 	USART0_sendString("...OK!");
- 5d0:	8a e6       	ldi	r24, 0x6A	; 106
- 5d2:	91 e0       	ldi	r25, 0x01	; 1
- 5d4:	0e 94 96 01 	call	0x32c	; 0x32c <USART0_sendString>
- 5d8:	ff cf       	rjmp	.-2      	; 0x5d8 <main+0x2e>
+ 64c:	8a ec       	ldi	r24, 0xCA	; 202
+ 64e:	91 e0       	ldi	r25, 0x01	; 1
+ 650:	0e 94 96 01 	call	0x32c	; 0x32c <USART0_sendString>
+ 654:	ff cf       	rjmp	.-2      	; 0x654 <main+0x2e>
 
-000005da <__tablejump2__>:
- 5da:	ee 0f       	add	r30, r30
- 5dc:	ff 1f       	adc	r31, r31
- 5de:	05 90       	lpm	r0, Z+
- 5e0:	f4 91       	lpm	r31, Z
- 5e2:	e0 2d       	mov	r30, r0
- 5e4:	09 94       	ijmp
+00000656 <__tablejump2__>:
+ 656:	ee 0f       	add	r30, r30
+ 658:	ff 1f       	adc	r31, r31
+ 65a:	05 90       	lpm	r0, Z+
+ 65c:	f4 91       	lpm	r31, Z
+ 65e:	e0 2d       	mov	r30, r0
+ 660:	09 94       	ijmp
 
-000005e6 <_exit>:
- 5e6:	f8 94       	cli
+00000662 <_exit>:
+ 662:	f8 94       	cli
 
-000005e8 <__stop_program>:
- 5e8:	ff cf       	rjmp	.-2      	; 0x5e8 <__stop_program>
+00000664 <__stop_program>:
+ 664:	ff cf       	rjmp	.-2      	; 0x664 <__stop_program>
