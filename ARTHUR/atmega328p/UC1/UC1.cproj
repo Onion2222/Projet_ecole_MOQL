@@ -133,10 +133,13 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="moteurs.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="PWM.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="PWM.h">
+    <Compile Include="moteurs.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="timer.c">
