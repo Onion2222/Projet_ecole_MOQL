@@ -6,6 +6,8 @@ ADC.c
 
 main.c
 
+SPI.c
+
 timer0.c
 
 timer1.c

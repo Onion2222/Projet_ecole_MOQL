@@ -13,6 +13,7 @@
 #include "timer1.h"
 #include "timer0.h"
 #include "ADC.h"
+#include "SPI.h"
 
 
 uint8_t angle=12;
@@ -25,7 +26,7 @@ ISR(ADC_vect){
 	if(ADC_getMesure()>=400){
 		//si obstacle...
 	}else{
-		sinon...
+		//sinon...
 	}
 
 }
@@ -61,6 +62,19 @@ ISR(TIMER0_OVF_vect){
 }
 
 
+
+ISR (USI_OVF_vect){
+	uint8_t reception=USIDR;
+	switch (reception)
+	{
+	case 0x01:
+		USIDR = 0x05;
+		break;
+	}
+	
+}
+
+
 int main(void)
 {
 	//PORTB=0xFF;//0000 1000
@@ -73,6 +87,7 @@ int main(void)
 	
 	timer0_init();
 	ADC_init();
+	SPI_USI_init();
 	
 	
 	sei();
