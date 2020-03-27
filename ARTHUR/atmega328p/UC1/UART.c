@@ -56,3 +56,5 @@ void USART0_sendString(char* data){
 	USART0_sendByte(13); //CR
 	USART0_sendByte(10); //LF
 }
+
+

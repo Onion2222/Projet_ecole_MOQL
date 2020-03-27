@@ -11,3 +11,4 @@ void USART0_init(uint16_t ubrr);
 void USART0_sendByte(unsigned char data);
 
 void USART0_sendString(char* data);
+

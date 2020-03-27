@@ -13,5 +13,13 @@
 
 
 void SPI_USI_init(){
-	USICR=0x52;//0 1(COV interrupt) 01(3 wires) 001(master clock ?) 0
+	//activation des ports
+	//MOSI:	PB0 input
+	//MISO:	PB1 output
+	//SCK:	PB2 input? output selon datasheet -> marche avec: INPUT
+	DDRB|=0x02; //0000 0010
+	DDRB&=~0x05;//0000 0101
+	
+	USICR = ((1<<USIWM0)|(1<<USICS1));
+	USICR |= (1<<USIOIE);
 }

@@ -28,29 +28,36 @@ volatile uint8_t override_obst=0;
 
 
 
-
 ISR (TIMER0_COMPA_vect){
 	if(++var_clk>=80){//execution toutes les secondes
 		
 		if(heartbeat==1){ //heartbeat, pour savoir si toutes les composantes du systemes sont OP
 			PORTC^=DEBUG_LED; //clignotement de la LED de debug
 			USART0_sendByte('*'); //envoie d'un heartbeat à l'UART
+
+
 			
 			//Heartbeat du salve SPI
-			if(SPI_MasterEnvoieReception(0x01)==0x05){ //envoie de 0x01 (0x02 ACK)
-				USART0_sendByte('^'); //envoie de '^' pour heartbeat de salve SPI
-			}
+			/*if(SPI_MasterEnvoieReception(0x01)==0x05){
+				USART0_sendByte('!');
+			}*/
+
+
 			
 			var_clk=0;
 		}
 		
 	}
-	if(++var_t_acq_IR>=8){ //toutes les 0,1sec
+	if(++var_t_acq_IR>=32){ //toutes les 0,4sec
 		//rapport d'état slave SPI
-		if(SPI_MasterEnvoieReception(0x09)==0X02){ //si obstacle/erreur => voir tableau excel
+		if(SPI_MasterEnvoieReception(0x09)==0x02){ //si obstacle/erreur => voir tableau excel
 			//get position capteur IR
+			USART0_sendString("_");
+			
 			uint8_t angle =SPI_MasterEnvoieReception(0x0E); //voir tableau excel
-			uint8_t mesure =SPI_MasterEnvoieReception(0x04); //voir tableau excel
+			uint16_t mesure =SPI_MasterEnvoieReception(0x04); //voir tableau excel
+			mesure +=(SPI_MasterEnvoieReception(0x05)<<8); //voir tableau excel
+			
 			USART0_sendString("Obstacle position: {");
 			USART0_sendByte(angle);
 			USART0_sendByte(',');
@@ -105,10 +112,11 @@ ISR(USART_RX_vect){
 		//diagnostique
 		USART0_sendString("Debut diagnostique");
 		//SPI
-
-		//Capteur IR
-
-		//niveau batterie
+		if(SPI_MasterEnvoieReception(0x01)==0x05){
+			USART0_sendString("SPI: OK");
+		}else{
+			USART0_sendString("SPI: NOK");
+		}
 		
 		break;
 
@@ -144,12 +152,12 @@ ISR(USART_RX_vect){
 		//commande envoie SPI slave
 		case 'p':
 		SPI_MasterEnvoie(0xB); //arret balayage
-		SPI_MasterEnvoie(0xC);
+		SPI_MasterEnvoie(0xC); //augmentation angle servo
 		break;
 		
 		case 'm':
 		SPI_MasterEnvoie(0xB); //arret balayage
-		SPI_MasterEnvoie(0xD);
+		SPI_MasterEnvoie(0xD); //diminution angle servo
 		break;
 		
 		case 'l':
