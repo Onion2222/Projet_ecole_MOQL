@@ -151,17 +151,15 @@ ISR(USART_RX_vect){
 		
 		//commande envoie SPI slave
 		case 'p':
-		SPI_MasterEnvoie(0xB); //arret balayage
-		SPI_MasterEnvoie(0xC); //augmentation angle servo
+		SPI_MasterEnvoie(0x0C); //augmentation angle servo (arret automatique)
 		break;
 		
 		case 'm':
-		SPI_MasterEnvoie(0xB); //arret balayage
-		SPI_MasterEnvoie(0xD); //diminution angle servo
+		SPI_MasterEnvoie(0x0D); //diminution angle servo (arret automatique)
 		break;
 		
 		case 'l':
-		SPI_MasterEnvoie(0x6); //toggle balayage
+		SPI_MasterEnvoie(0x06); //toggle balayage
 		break;
 		
 		case 'o':
