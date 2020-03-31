@@ -15,9 +15,9 @@
 
 void PWM_timer1_init(){
 	TCCR1|=0x88;//1(clear à OCR1C) 000(timerA) 1011(horloge predive 128 voir calcul) =>1000 1000
-	GTCCR|=0x40;//? 1(ON/OFF) 01(set Hcomp pwm) 00(force value) 0 ? =>0x01 0000
-	OCR1B=12; //milieu
-	OCR1C=156; //max compteur
+	GTCCR|=0x40;//? 1/0(ON/OFF) 01(set Hcomp pwm) 00(force value) 0 ? =>0x01 0000 pour debut en OFF
+	OCR1B=12; //90 deg
+	OCR1C=156; //max compteur pour 20ms
 }
 
 void PWM_timer1_start(){

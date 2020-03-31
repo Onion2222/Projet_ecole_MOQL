@@ -41,17 +41,17 @@ ISR(ADC_vect){
 
 
 ISR(TIMER0_OVF_vect){
-	if((++var_timer0_interupt>=2)&var_timer0_actif)
+	if((++var_timer0_interupt>=2)&var_timer0_actif) //ajustement du delay du timer (trop cours sur 8bits)
 	{
 		
-		if(angle==5){ //min 3
-			angle=13; //max 17
+		if(angle==9){ //min 8
+			angle=16; //max 17
 		}
 		else{
-			if(angle==13){ //max 17
-				angle=5; //min 3
+			if(angle==16){ //max 17
+				angle=9; //min 8
 				}else{
-				angle=5; //min 3
+				angle=9; //min 8
 			}
 		}
 		PWM_timer1_set(angle);
@@ -64,7 +64,7 @@ ISR(TIMER0_OVF_vect){
 
 
 ISR (USI_OVF_vect){
-	PORTB^=0x10; //PB3 test
+
 	uint8_t reception=USIDR;
 
 	switch (reception)
