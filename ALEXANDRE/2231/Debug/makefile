@@ -10,6 +10,9 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
+"./ADC.obj" \
+"./SPI.obj" \
+"./board.obj" \
 "./main.obj" \
 "../lnk_msp430g2231.cmd" \
 $(GEN_CMDS__FLAG) \
@@ -154,8 +157,8 @@ SAMBOT_SLAVE.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" 
-	-$(RM) "main.d" 
+	-$(RM) "ADC.obj" "SPI.obj" "board.obj" "main.obj" 
+	-$(RM) "ADC.d" "SPI.d" "board.d" "main.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
