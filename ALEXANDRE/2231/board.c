@@ -11,7 +11,9 @@
  unsigned int up = 0; // sens de variation
  unsigned int cmd = 0; // periode du signal de commande moteur
  unsigned int  result_adc =0 ;
- unsigned char distance = 0;
+ unsigned int  distance = 0;
+
+
  /**
   * Intialisation du Timer pour le servo
   */
@@ -68,7 +70,7 @@ void init_board(){
 
 }
 
-char  detectionObstacle(){
+int  detectionObstacle(){
     ADC_Demarrer_conversion(0);
     result_adc = ADC_Lire_resultat();
     distance = (1017 - result_adc) / 23;

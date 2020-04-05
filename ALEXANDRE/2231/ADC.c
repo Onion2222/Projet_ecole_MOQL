@@ -22,6 +22,25 @@ void init_adc(void)
 
 
 
+/**
+* int to string
+*/
+
+void dec_to_str (char* str, int val, int digits)
+{
+  int i=1u;
+
+  for(; i<=digits; i++)
+  {
+    str[digits-i] = (char)((val % 10u) + '0');
+    val/=10u;
+  }
+
+  str[i-1u] = '\0';
+}
+
+
+
 void ADC_Demarrer_conversion(unsigned char voie)
 {
     ADC10CTL1 = (voie * 0x1000)+ ADC10DIV_0 + ADC10SSEL_2 +  SHS_0 + CONSEQ_0 ;

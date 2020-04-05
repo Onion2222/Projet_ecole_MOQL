@@ -1,5 +1,6 @@
 #include <msp430.h>
 
+ char marche_avant = 0;
 /*
  * INIT TIMER MOTEUR
  * INIT TIMER SPI
@@ -34,11 +35,12 @@ void init_TimerMot()
 /*
  * Permet d'activer les roues du robot
  */
-void robotMvt()
+void robotMvt(int dcA , int dcB)
 {
+
     P2DIR |= (BIT2|BIT4);
-    TA1CCR1 = 4000; /*Rapport cyclique de X% */
-    TA1CCR2 = 4000;
+    TA1CCR1 = dcA; /*Rapport cyclique de X% */
+    TA1CCR2 = dcB;
     TA1CTL = TASSEL_2 | MC_1; // Start du Timer
 }
 /*
@@ -46,6 +48,7 @@ void robotMvt()
  */
 void robotStop()
 {
+    marche_avant = 0;
     P2DIR &= ~(BIT2|BIT4);
     TA1CCR1 = 0;
     TA1CCR2 = 0;
@@ -67,21 +70,26 @@ void robotSens(int sens)
 {
     if(sens == 0) // Avancer
     {
+        marche_avant = 1;
+        robotMvt(2000,2000);
         P2OUT &= ~(BIT1);
         P2OUT |= BIT5;
     }
     if(sens == 1) // Reculer
     {
+        robotMvt(2000,2000);
         P2OUT |= BIT1;
         P2OUT &= ~BIT5;
     }
     if(sens == 2) // Droite
     {
+        robotMvt(2000,1000);
         P2OUT &= ~BIT1;
         P2OUT &= ~BIT5;
     }
     if(sens == 3) // Gauche
     {
+        robotMvt(1000,2000);
         P2OUT |= BIT1;
         P2OUT |= BIT5;
     }

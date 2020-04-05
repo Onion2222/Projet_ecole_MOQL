@@ -3,14 +3,13 @@
 #include <SPI.h>
 #include <board.h>
 #include <ADC.h>
+#include <stdint.h>
 /*
  * Variables Globales pour interruptions
  */
  unsigned char RXDta;
-
-/**
- * main.c
- */
+ unsigned int place, place2;
+ unsigned char retour;
 
 int main(void)
 {
@@ -20,6 +19,7 @@ int main(void)
     init_usi();
     init_timer();
     init_adc();
+
 
 
     while ((P1IN & BIT5)) ;
@@ -37,10 +37,12 @@ __interrupt void universal_serial_interface(void)
     if (RXDta == 0x34)
     {
         commandServo();             /* Commande servo*/
+
     }
 
-    USISRL = detectionObstacle();   /* retour = distance obstacle */
-    USICNT &= ~USI16B;              /* Reinitialisation du compteur */
+    retour = detectionObstacle();
+    USISRL =  retour;               /* retour = distance obstacle */
+    USICNT &= ~USI16B;              /* Reinitialisation du compteur bit à abit */
     USICNT = 0x08;                  /* Compteur sur 8Bits . Registre pret pour la nouvelle commande */
 
 }
