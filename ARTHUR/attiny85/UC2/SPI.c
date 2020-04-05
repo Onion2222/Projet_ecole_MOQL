@@ -22,4 +22,10 @@ void SPI_USI_init(){
 	
 	USICR = ((1<<USIWM0)|(1<<USICS1));
 	USICR |= (1<<USIOIE);
+	//USISIE:0 interrupt start com EN
+	//USIOIE:1 interrupt 8 coups d'hologe EN
+	//USIWM[1:0]:01 mode SPI (3 wire)
+	//USICS[0:1]:01 Software clock strobe (USICLK) => horloge maitre
+	//USICLK:0   ^^ ^^
+	//USITC:0 utilisation clock master
 }

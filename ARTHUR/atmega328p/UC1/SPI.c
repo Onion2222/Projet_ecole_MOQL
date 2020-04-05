@@ -24,6 +24,13 @@ void SPI_init(){
 
 	//activation du SPI en master avec prescaler de /128
 	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR1)|(1<<SPR0);
+	//SPIE:0 SPI interupt (inutile)
+	//SPE:1 SPI EN
+	//DORD:0 MSB first
+	//MSTR:1 M/S SELECT (pas utilisé mais doit etre declaré)
+	//CPOL:0  Rising edge
+	//CPHA:0 osef
+	//SPR[2:0]:011 presacaler 128 (max)
 }
 
 /*

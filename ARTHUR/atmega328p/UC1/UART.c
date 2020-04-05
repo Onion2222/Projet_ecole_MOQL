@@ -24,8 +24,8 @@ void USART0_init(uint16_t ubrr){
 	//se referer au datasheet
 	UBRR0H = (uint8_t)(ubrr>>8); //def baud 1/2
 	UBRR0L = (uint8_t)ubrr; //def baud 2/2
-	UCSR0B = 0x98;//1 0 0 1 1 0? 0? 0?
-	UCSR0C = 0x06;//00 00 0 1 1 0
+	UCSR0B = 0x98;//1(interrupt en RX) 0(interrupt en TX) 0(interrupt data reg empty) 1(RX en) 1(TX en) 0(8 bits) 0(9e bit) 0(9e bit)
+	UCSR0C = 0x06;//00(Asynchrone) 00(parity disabled) 0(1 stop bit) 11(8bit) 0(clock polarity: falling edge)
 }
 
 
