@@ -1,14 +1,16 @@
+#include <Util.h>
+
 /**
 * int to string
 */
 
-void dec_to_str (char* str, int val, int digits)
+void dec_to_str (CHAR_8* str, INT_32 val, INT_32 digits)
 {
-  int i=1u;
+  INT_32 i=1u;
 
   for(; i<=digits; i++)
   {
-    str[digits-i] = (char)((val % 10u) + '0');
+    str[digits-i] = (CHAR_8)((val % 10u) + '0');
     val/=10u;
   }
 

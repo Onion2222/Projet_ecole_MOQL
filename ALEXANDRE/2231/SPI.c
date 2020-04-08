@@ -11,7 +11,7 @@
 /*
  * Initialisation de l'USI pour la communication avec le MSP 2553
  */
-void init_usi(){
+void init_usi(void){
 
     USICTL0 |= USISWRST;
     USICTL1 = 0;                                /* Reinit registre */

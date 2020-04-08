@@ -7,6 +7,7 @@
  */
 
 #include <msp430.h>
+#include <Util.h>
 
 /*
  * Initialisation du SPI
@@ -26,7 +27,7 @@ void init_SPI(){
 
     UCB0CTL1=(UCSSEL_2);                                /* Reglage Horloge */
     UCB0BR0=0x0F;
-    UCB0BR1=0x00; //division SMCLK par 1024
+    UCB0BR1=0x00;                                       /*division SMCLK par 1024*/
 
     UCB0CTL1&=~UCSWRST;                                 /* Activation */
 
@@ -39,12 +40,12 @@ void init_SPI(){
  * Permet d'envoyer une commmande vers le 2231.
  */
 
-void send_SPI(unsigned char toSend){
+void send_SPI(UCHAR toSend){
     while ((UCB0STAT & UCBUSY));                /* Attente etat msp */
     while(!(IFG2 & UCB0TXIFG));
     UCB0TXBUF=toSend;
 
-    P1OUT|=0x01; //clignotement LED
+    P1OUT|=0x01;
     __delay_cycles(250);
-    P1OUT&=~0x01; //extinction LED
+    P1OUT&=~0x01;
 }

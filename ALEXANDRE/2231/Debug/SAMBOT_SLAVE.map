@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v18.1.2                     
 ******************************************************************************
->> Linked Thu Apr  2 17:00:10 2020
+>> Linked Wed Apr  8 10:49:36 2020
 
 OUTPUT FILE NAME:   <SAMBOT_SLAVE.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000facc
