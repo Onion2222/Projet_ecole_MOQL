@@ -1,6 +1,7 @@
 #include <msp430.h>
+#include <Util.h>
 
-void init_uart(){
+void init_uart(void){
 
     UCA0CTL1 |= UCSWRST;                      // SOFTWARE RESET
 
@@ -15,22 +16,22 @@ void init_uart(){
     IE2 |= UCA0RXIE;                          /* Activation des interruption */
 }
 
-void send_uart(char vC){
+void send_uart(CHAR_8 vC){                    /* Envoi 1 caractère */
 
-    while (!(IFG2&UCA0TXIFG)); //busy ?
-    UCA0TXBUF=vC; //envoie
+    while (!(IFG2&UCA0TXIFG));
+    UCA0TXBUF=vC;
 }
 
-void send_uart_sdl(){
-    while (!(IFG2&UCA0TXIFG)); //busy ?
-    UCA0TXBUF=0xD; //envoie
+void send_uart_sdl(void){                    /* Envoi 1 saut de ligne */
+    while (!(IFG2&UCA0TXIFG));
+    UCA0TXBUF=0xD;
 
-    while (!(IFG2&UCA0TXIFG)); //busy ?
+    while (!(IFG2&UCA0TXIFG));
     UCA0TXBUF=0xA;
 }
 
-void send_uart_l(const char *vStr){
-    unsigned int i=0;
+void send_uart_l(const CHAR_8 *vStr){       /* Envoi 1 chaine de caractère */
+    UINT_32 i=0;
     for(i=0;vStr[i]!=0x00;i++){             /* Tant qu'on est pas arriver au dernier char du tableau */
         while (!(IFG2&UCA0TXIFG));
         send_uart(vStr[i]);

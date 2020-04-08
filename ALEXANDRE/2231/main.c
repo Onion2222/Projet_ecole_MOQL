@@ -3,15 +3,15 @@
 #include <SPI.h>
 #include <board.h>
 #include <ADC.h>
-#include <stdint.h>
+#include <Util.h>
 /*
  * Variables Globales pour interruptions
  */
- unsigned char RXDta;
- unsigned int place, place2;
- unsigned char retour;
+UCHAR RXDta;
+UINT_32 place, place2;
+UCHAR retour;
 
-int main(void)
+INT_32 main(void)
 {
     WDTCTL = WDTPW | WDTHOLD;   /* stop watchdog timer */
 
@@ -24,7 +24,7 @@ int main(void)
 
     while ((P1IN & BIT5)) ;
     USICTL0 &= ~USISWRST;
-    __bis_SR_register(LPM0_bits | GIE); // general interrupts enable & Lowwer Mode
+    __bis_SR_register(LPM0_bits | GIE); /* general interrupts enable & Lowwer Mode */
 }
 
 #pragma vector=USI_VECTOR
