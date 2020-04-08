@@ -1,126 +1,173 @@
-/* Sample Kernel module with /dev interface
-*   NOTE : the /dev entry must be created before loading this module with the command
-*       mknod /dev/caesar c 60 0
-*   executed as root.
-* This program is GPL.
-*/
+#include <msp430.h>
+#include <SPI.h>
+#include <UART.h>
+#include <board.h>
+#include <Util.h>
 
-#define DEV_NAME "caesar"
-
-/** Includes **/
-#include <linux/module.h>
-#include <linux/init.h>
-#include <linux/kernel.h> // printk
-#include <linux/fs.h>
-#include <linux/uaccess.h> /* copy_from/to_user */
-
-/** Informations du driver **/
-MODULE_LICENSE("GPL");
-MODULE_DESCRIPTION("A Caesar Cipher module with /dev interface");
-MODULE_AUTHOR("Alexandre SANNIER <alexandre.sannier@groupe-esigelec.org > - Arthur PERRIN < arthur.perrin@groupe-esigelec.org>");
-MODULE_SUPPORTED_DEVICE(DEV_NAME);
-
-static int major = 61;
-static int key = 0;
-static char encryptedMsg = 0;
-
-/* Prototypes */
-static ssize_t caesarRead(struct file *file, char *buf, size_t count, loff_t *ppos);
-static ssize_t caesarOpen(struct inode *inode, struct file *file);
-static ssize_t caesarRelease(struct inode *inode, struct file *file);
-static ssize_t caesarWrite(struct file *file, const char *buf, size_t count, loff_t *ppos);
-
-static struct file_operations caesar_ops=
-{
-    .read = caesarRead,
-    .open = caesarOpen,
-    .release = caesarRelease,
-    .write =caesarWrite
-};
-
-
-/*
- * Fonctions lancées au chargement / déchargement du module
+#define CMDLEN  2
+unsigned char retour[CMDLEN];
+unsigned int distance[2];
+unsigned char balayageAuto = 0 ;//
+unsigned char afficherDistance = 0 ;//
+/**
+ * main.c
  */
-static int __init caesar_init(void)
+int main(void)
 {
-    printk(KERN_ALERT "caesar Loading v2\n");
+    WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
 
-    register_chrdev(major,DEV_NAME,&caesar_ops);
-
-    printk(KERN_ALERT "MAJOR = %d\n" , major);
-
-    return 0;
-};
-
-static void __exit caesar_exit(void)
-{
-    printk(KERN_ALERT "caesar Unloading ...\n");
-    unregister_chrdev(major,DEV_NAME);
-};
-
-// Fait connaitre ces fonctions au noyau
-module_init(caesar_init);
-module_exit(caesar_exit);
-
-/*
- * Fonctions lancées lors des accès au fichier /dev/caesar
- */
-// Lecture du fichier
-static ssize_t caesarRead(struct file *file, char *buf, size_t count, loff_t *ppos)
-{
-
-   char mesg[] = " \n";
-    mesg[0] = encryptedMsg + key;
-   printk(KERN_ALERT "read()\n");
-    if ( mesg[(*ppos)] != '\0' ){
-
-      copy_to_user( buf , (mesg+(*ppos)) , 1 );
-      *ppos += 1;
-      return 1;
-    }else{
-      return 0;
+    if( (CALBC1_1MHZ==0xFF) || (CALDCO_1MHZ==0xFF) )
+    {
+        while(1);
     }
+    else
+    {
+        // Factory Set.
+        DCOCTL = 0;                               // Select lowest DCOx and MODx settings
+        BCSCTL1 = CALBC1_1MHZ;                    // Set DCO
+        DCOCTL = CALDCO_1MHZ;
+    }
+
+    //init P1
+    P1SEL=0x00;
+    P1SEL2=0x00;
+
+    P1SEL = 0x00;        /* GPIO */
+    P1DIR = 0x00;        /* IN   */
+
+    /*Configuration LED */
+    P1DIR |=  BIT0;
+    P1OUT |= BIT0;
+
+
+    init_uart();
+    init_SPI();
+    init_timer_com_spi();
+
+    init_TimerMot();
+    init_Robot();
+
+
+    send_uart_l("=> MSP430 en ligne <=");
+    send_uart_sdl();
+    send_uart_sdl();
+
+   __enable_interrupt();
+    //__bis_SR_register(LPM4_bits | GIE); // general interrupts enable & Low Power Mode
+
+    for(;;);
 
 }
 
-static ssize_t caesarOpen(struct inode *inode, struct file *file)
+
+#pragma vector = USCIAB0RX_VECTOR
+__interrupt void USCIAB0RX_ISR()
 {
+    if (IFG2 & UCA0RXIFG)
+    {
 
-        printk(KERN_ALERT "open()\n");
-    return 0;
+        while(!(IFG2 & UCA0RXIFG));
+        unsigned char vC=UCA0RXBUF;
+        unsigned char tC=UCB0RXBUF;
 
-}
+        switch(vC){
+            case 'h':
+                send_uart_l("==Bienvenue dans l'aide==");send_uart_sdl();
+                send_uart_l("h - Aide");send_uart_sdl();
+                send_uart_l("a - Avancer");send_uart_sdl();
+                send_uart_l("r - Reculer ");send_uart_sdl();
+                send_uart_l("d - Tourner droit");send_uart_sdl();
+                send_uart_l("g - Tourner gauche");send_uart_sdl();
+                send_uart_l("s - Stopper le robot");send_uart_sdl();
+                send_uart_l("o - Commande servo moteur - detecteur obstacle");send_uart_sdl();
+                send_uart_l("f - Afficher distance");send_uart_sdl();
+                break;
+            case 'a':
+                send_uart_l(">Marche avant");send_uart_sdl();
+                robotSens(0);
+                robotMvt(1500,1500);
+                break;
+            case 'r':
+                send_uart_l(">Marche arrière");send_uart_sdl();
+                robotSens(1);
+                robotMvt(1500,1500);
+                break;
+            case 'd':
+                send_uart_l(">Tourner a droite");send_uart_sdl();
+                robotSens(2);
+                robotMvt(1200,1800);
+                break;
+            case 'g':
+                send_uart_l(">Tourner a gauche");send_uart_sdl();
+                robotSens(3);
+                robotMvt(1800,1200);
+                break;
+            case 's':
+                send_uart_l(">Stopper robot");send_uart_sdl();
+                robotStop();
+                break;
+            case 'o':
+                if (balayageAuto == 0){
+                    send_uart_l(">Activation balayage capteur");send_uart_sdl();
+                    balayageAuto = 1;
+                }
+                else{
+                    send_uart_l(">Desactivation balayage capteur");send_uart_sdl();
+                    balayageAuto = 0;
+                }
+                break;
+            case 'f':
 
-static ssize_t caesarRelease(struct inode *inode, struct file *file)
-{
-        printk(KERN_ALERT "release()\n");
-    return 0;
-}
+                if (afficherDistance == 0){
+                    send_uart_l(">Activation affichage distance : ");send_uart_sdl();
+                    afficherDistance = 1;
+                }
+                else{
+                    send_uart_l(">Desactivation affichage distance : ");send_uart_sdl();
+                    afficherDistance = 0;
+                }
+                break;
+            default:
+                send_uart_l("commande inconnue");send_uart_sdl();
+                break;
+            }
 
-static ssize_t caesarWrite(struct file *file, const char *buf, size_t count, loff_t *pposin)
-{
-char var_recue[]= " ";
-
-copy_from_user(var_recue + *pposin, buf ,count);
-
-printk(KERN_ALERT "write()\n");
-
-
-
-    if (*pposin==0 && ( var_recue[(*pposin)] >= '0' && var_recue[(*pposin)] <= '9')){
-        key = var_recue[0] - 48;
-        printk(KERN_ALERT "Key added %d \n",key);
-
-    }
-
-    if ( var_recue[(*pposin)]  >= 'A' && var_recue[(*pposin)] <= 'Z'){
-        encryptedMsg = var_recue[(*pposin)] ;
-    }
-    if ( var_recue[(*pposin)]  >= 'a' && var_recue[(*pposin)] <= 'z'){
-            encryptedMsg = var_recue[(*pposin)] ;
         }
+        else if (IFG2 & UCB0RXIFG)
+        {
+            while( (UCB0STAT & UCBUSY) && !(UCB0STAT & UCOE) );
+            while(!(IFG2 & UCB0RXIFG));
+            retour[0] = UCB0RXBUF;
+            distance[0] = (int)retour[0];
 
-        return count;
 
+            if ( (afficherDistance == 1) && (distance[0] != distance[1])   ){
+                distance[1] = distance[0];
+                dec_to_str(retour , distance[0] , 2);
+
+                send_uart_l("Distance de l'obstacle :");
+                send_uart_l(retour);
+                send_uart_l("cm");
+                send_uart_sdl();
+            }
+
+            if (distance[0] < 8 ){
+                    send_uart_l("OBSTACLE DETECTE");
+                    send_uart_sdl();
+                }
+            retour[1] = 0x00;
+        }
 }
+
+#pragma vector=TIMER0_A1_VECTOR //voir diaporama seance prputtyecedente
+__interrupt void ma_fnc_timer(void)
+{
+if (balayageAuto == 1){
+    send_SPI(0x34);
+    __delay_cycles(250);
+}
+send_SPI(0x50);
+TA0CTL &= ~TAIFG; //RAZ TAIFG
+}
+
+
