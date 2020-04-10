@@ -126,6 +126,8 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/b
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5\libatmega328p.a
 END GROUP
+                0x00000000                __TEXT_REGION_ORIGIN__ = DEFINED (__TEXT_REGION_ORIGIN__)?__TEXT_REGION_ORIGIN__:0x0
+                0x00800060                __DATA_REGION_ORIGIN__ = DEFINED (__DATA_REGION_ORIGIN__)?__DATA_REGION_ORIGIN__:0x800060
                 0x00020000                __TEXT_REGION_LENGTH__ = DEFINED (__TEXT_REGION_LENGTH__)?__TEXT_REGION_LENGTH__:0x20000
                 0x0000ffa0                __DATA_REGION_LENGTH__ = DEFINED (__DATA_REGION_LENGTH__)?__DATA_REGION_LENGTH__:0xffa0
                 0x00010000                __EEPROM_REGION_LENGTH__ = DEFINED (__EEPROM_REGION_LENGTH__)?__EEPROM_REGION_LENGTH__:0x10000
@@ -224,7 +226,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x69e
+.text           0x00000000      0x692
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -356,35 +358,35 @@ END GROUP
                 0x000002de        0xa SPI.o
                 0x000002de                SPI_MasterEnvoie
  .text.SPI_MasterEnvoieReception
-                0x000002e8       0x1c SPI.o
+                0x000002e8       0x18 SPI.o
                 0x000002e8                SPI_MasterEnvoieReception
  .text.timer0_init
-                0x00000304       0x12 timer.o
-                0x00000304                timer0_init
+                0x00000300       0x12 timer.o
+                0x00000300                timer0_init
  .text.USART0_init
-                0x00000316       0x16 UART.o
-                0x00000316                USART0_init
+                0x00000312       0x16 UART.o
+                0x00000312                USART0_init
  .text.USART0_sendByte
-                0x0000032c       0x10 UART.o
-                0x0000032c                USART0_sendByte
+                0x00000328       0x10 UART.o
+                0x00000328                USART0_sendByte
  .text.USART0_sendString
-                0x0000033c       0x58 UART.o
-                0x0000033c                USART0_sendString
+                0x00000338       0x58 UART.o
+                0x00000338                USART0_sendString
  .text.__vector_14
-                0x00000394       0xf6 main.o
-                0x00000394                __vector_14
+                0x00000390       0xee main.o
+                0x00000390                __vector_14
  .text.__vector_18
-                0x0000048a      0x1d4 main.o
-                0x0000048a                __vector_18
- .text.main     0x0000065e       0x30 main.o
-                0x0000065e                main
- .text.libgcc   0x0000068e        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
-                0x0000068e                __tablejump2__
-                0x0000069a                . = ALIGN (0x2)
+                0x0000047e      0x1d4 main.o
+                0x0000047e                __vector_18
+ .text.main     0x00000652       0x30 main.o
+                0x00000652                main
+ .text.libgcc   0x00000682        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_tablejump2.o)
+                0x00000682                __tablejump2__
+                0x0000068e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000069a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x0000069a                _exit
-                0x0000069a                exit
+ .fini9         0x0000068e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x0000068e                _exit
+                0x0000068e                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -403,11 +405,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000069a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000068e        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000069e                _etext = .
+                0x00000692                _etext = .
 
-.data           0x00800100       0xe4 load address 0x0000069e
+.data           0x00800100       0xe2 load address 0x00000692
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -420,40 +422,40 @@ END GROUP
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800103       0xe1 main.o
+                0x00800103       0xdf main.o
  *(.gnu.linkonce.r*)
-                0x008001e4                . = ALIGN (0x2)
-                0x008001e4                _edata = .
-                0x008001e4                PROVIDE (__data_end, .)
+                0x008001e2                . = ALIGN (0x2)
+                0x008001e2                _edata = .
+                0x008001e2                PROVIDE (__data_end, .)
 
-.bss            0x008001e4        0x5
-                0x008001e4                PROVIDE (__bss_start, .)
+.bss            0x008001e2        0x5
+                0x008001e2                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.commutAvance
-                0x008001e4        0x1 moteurs.o
-                0x008001e4                commutAvance
+                0x008001e2        0x1 moteurs.o
+                0x008001e2                commutAvance
  .bss.commutTourne
-                0x008001e5        0x1 moteurs.o
-                0x008001e5                commutTourne
+                0x008001e3        0x1 moteurs.o
+                0x008001e3                commutTourne
  .bss.override_obst
-                0x008001e6        0x1 main.o
-                0x008001e6                override_obst
+                0x008001e4        0x1 main.o
+                0x008001e4                override_obst
  .bss.var_t_acq_IR
-                0x008001e7        0x1 main.o
-                0x008001e7                var_t_acq_IR
- .bss.var_clk   0x008001e8        0x1 main.o
-                0x008001e8                var_clk
+                0x008001e5        0x1 main.o
+                0x008001e5                var_t_acq_IR
+ .bss.var_clk   0x008001e6        0x1 main.o
+                0x008001e6                var_clk
  *(COMMON)
-                0x008001e9                PROVIDE (__bss_end, .)
-                0x0000069e                __data_load_start = LOADADDR (.data)
-                0x00000782                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x008001e7                PROVIDE (__bss_end, .)
+                0x00000692                __data_load_start = LOADADDR (.data)
+                0x00000774                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008001e9        0x0
+.noinit         0x008001e7        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008001e9                _end = .
+                0x008001e7                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -493,16 +495,15 @@ END GROUP
 .stab.indexstr
  *(.stab.indexstr)
 
-.comment        0x00000000       0x60
+.comment        0x00000000       0x30
  *(.comment)
  .comment       0x00000000       0x30 moteurs.o
                                  0x31 (size before relaxing)
- .comment       0x00000030       0x30 PWM.o
-                                 0x31 (size before relaxing)
- .comment       0x00000060       0x31 SPI.o
- .comment       0x00000060       0x31 timer.o
- .comment       0x00000060       0x31 UART.o
- .comment       0x00000060       0x31 main.o
+ .comment       0x00000030       0x31 PWM.o
+ .comment       0x00000030       0x31 SPI.o
+ .comment       0x00000030       0x31 timer.o
+ .comment       0x00000030       0x31 UART.o
+ .comment       0x00000030       0x31 main.o
 
 .note.gnu.avr.deviceinfo
                 0x00000000       0x40
@@ -542,35 +543,35 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x122c
+.debug_info     0x00000000     0x1221
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_info    0x000005f4      0x2b5 moteurs.o
  .debug_info    0x000008a9      0x15d PWM.o
- .debug_info    0x00000a06       0xec SPI.o
- .debug_info    0x00000af2       0x93 timer.o
- .debug_info    0x00000b85      0x139 UART.o
- .debug_info    0x00000cbe      0x56e main.o
+ .debug_info    0x00000a06       0xfd SPI.o
+ .debug_info    0x00000b03       0x93 timer.o
+ .debug_info    0x00000b96      0x139 UART.o
+ .debug_info    0x00000ccf      0x552 main.o
 
-.debug_abbrev   0x00000000      0x9ef
+.debug_abbrev   0x00000000      0xa06
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_abbrev  0x000005a2       0xd3 moteurs.o
  .debug_abbrev  0x00000675       0xb3 PWM.o
- .debug_abbrev  0x00000728       0xb0 SPI.o
- .debug_abbrev  0x000007d8       0x60 timer.o
- .debug_abbrev  0x00000838       0xd2 UART.o
- .debug_abbrev  0x0000090a       0xe5 main.o
+ .debug_abbrev  0x00000728       0xc7 SPI.o
+ .debug_abbrev  0x000007ef       0x60 timer.o
+ .debug_abbrev  0x0000084f       0xd2 UART.o
+ .debug_abbrev  0x00000921       0xe5 main.o
 
-.debug_line     0x00000000      0xa79
+.debug_line     0x00000000      0xa38
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x133 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_line    0x00000133      0x201 moteurs.o
- .debug_line    0x00000334      0x18a PWM.o
- .debug_line    0x000004be      0x118 SPI.o
- .debug_line    0x000005d6       0xba timer.o
- .debug_line    0x00000690      0x115 UART.o
- .debug_line    0x000007a5      0x2d4 main.o
+ .debug_line    0x00000334      0x183 PWM.o
+ .debug_line    0x000004b7      0x10e SPI.o
+ .debug_line    0x000005c5       0xba timer.o
+ .debug_line    0x0000067f      0x115 UART.o
+ .debug_line    0x00000794      0x2a4 main.o
 
 .debug_frame    0x00000000      0x2f8
  *(.debug_frame)
@@ -581,30 +582,30 @@ END GROUP
  .debug_frame   0x000001a8       0x60 UART.o
  .debug_frame   0x00000208       0xf0 main.o
 
-.debug_str      0x00000000      0x5b8
+.debug_str      0x00000000      0x52a
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x1d9 moteurs.o
-                                0x212 (size before relaxing)
- .debug_str     0x000003e1       0x7a PWM.o
-                                0x1b8 (size before relaxing)
- .debug_str     0x0000045b       0x44 SPI.o
-                                0x1b1 (size before relaxing)
- .debug_str     0x0000049f       0x70 timer.o
-                                0x18a (size before relaxing)
- .debug_str     0x0000050f       0x3f UART.o
-                                0x1b6 (size before relaxing)
- .debug_str     0x0000054e       0x6a main.o
-                                0x2ca (size before relaxing)
+ .debug_str     0x00000208      0x1e3 moteurs.o
+                                0x21c (size before relaxing)
+ .debug_str     0x000003eb       0x30 PWM.o
+                                0x1c2 (size before relaxing)
+ .debug_str     0x0000041b       0x44 SPI.o
+                                0x1bb (size before relaxing)
+ .debug_str     0x0000045f       0x22 timer.o
+                                0x190 (size before relaxing)
+ .debug_str     0x00000481       0x3f UART.o
+                                0x1c0 (size before relaxing)
+ .debug_str     0x000004c0       0x6a main.o
+                                0x2d4 (size before relaxing)
 
-.debug_loc      0x00000000      0x718
+.debug_loc      0x00000000      0x71a
  *(.debug_loc)
  .debug_loc     0x00000000      0x194 moteurs.o
  .debug_loc     0x00000194      0x10a PWM.o
- .debug_loc     0x0000029e       0x52 SPI.o
- .debug_loc     0x000002f0       0x2d timer.o
- .debug_loc     0x0000031d       0xd1 UART.o
- .debug_loc     0x000003ee      0x32a main.o
+ .debug_loc     0x0000029e       0x54 SPI.o
+ .debug_loc     0x000002f2       0x2d timer.o
+ .debug_loc     0x0000031f       0xd1 UART.o
+ .debug_loc     0x000003f0      0x32a main.o
 
 .debug_macinfo
  *(.debug_macinfo)
