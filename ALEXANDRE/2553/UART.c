@@ -3,13 +3,13 @@
 
 void init_uart(void){
 
-    UCA0CTL1 |= UCSWRST;                      // SOFTWARE RESET
+    UCA0CTL1 |= UCSWRST;                      /* SOFTWARE RESET */
 
-    P1SEL = BIT1 + BIT2 ;                     // P1.1 = RXD, P1.2=TXD
-    P1SEL2 = BIT1 + BIT2 ;                    // P1.1 = RXD, P1.2=TXD
+    P1SEL = BIT1 + BIT2 ;                     /* P1.1 = RXD, P1.2=TXD */
+    P1SEL2 = BIT1 + BIT2 ;                    /* P1.1 = RXD, P1.2=TXD */
 
-    UCA0CTL1 |= UCSSEL_2;                     // Selection de l'horloge 1Mhz
-    UCA0BR0 = 104;                            // 9600 baud > 1 000 000 / 9600 = 104
+    UCA0CTL1 |= UCSSEL_2;                     /* Selection de l'horloge 1Mhz */
+    UCA0BR0 = 9;                              /* 9600 baud > 1 000 000 / 115 000 = 8,7 */
     UCA0BR1 = 0;
     UCA0MCTL = UCBRS0;                        /* USCI Second Stage Modulation Select 0 */
     UCA0CTL1 &= ~UCSWRST;                     /* Fin de reset - Activation */

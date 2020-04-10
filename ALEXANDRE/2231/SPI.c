@@ -9,7 +9,7 @@
 #include <msp430.h>
 
 /*
- * Initialisation de l'USI pour la communication avec le MSP 2553
+ * Initialisation de l'USI pour la communication avec le MSP 2231
  */
 void init_usi(void){
 

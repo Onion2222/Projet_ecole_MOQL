@@ -10,18 +10,7 @@
  */
 
 
-/*
- * Timer permettant d'envoyant une commande à l'interface slave à interval régulier
- * afin d'obtenir un retour de variables provenant du 2231
- * Fréquence de 2HZ.
- */
-void init_timer_com_spi(void){
 
-    TA0CTL = 0|(TASSEL_2 | ID_3);
-    TA0CTL |= MC_3;
-    TA0CTL |= TAIE;
-    TA0CCR0 = 62500;
-}
 /*
  * initialisation horloge robot
  */
